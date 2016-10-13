@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <PreferenceCategory android:title="Driving Settings" >
+        <ListPreference
+            android:title="Transportation"
+            android:summary="Options for Transportation"
+            android:key="prefTrans"
+            android:entries="@array/list"
+            android:entryValues="@array/lValue"
+            />
+        <SeekBarPreference
+            android:defaultValue="4"
+            android:max ="9"
+            android:summary="Modify Rate between 1-10 seconds"
+            android:title="Refresh Rate"
+            android:key="prefRefresh">
+        </SeekBarPreference>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Notifications" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="prefNoti"
+            android:summary="Display Alerts"
+            android:title="Notifications" >
+        </CheckBoxPreference>
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="prefSound"
+            android:summary="Audible Alerts"
+            android:title="Sounds" >
+        </CheckBoxPreference>
+    </PreferenceCategory>
+
+</PreferenceScreen>
