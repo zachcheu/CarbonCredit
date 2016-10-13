@@ -37,15 +37,21 @@ public class MainActivity extends Activity {
         });
         floatingActionButton2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Var.RefreshRate = setting.getInt("prefRefresh", 0)+1;
+                Var.RefreshRate = setting.getInt("prefRefresh", 0) + 1;
                 Var.Noti = setting.getBoolean("prefNoti", true);
                 Var.Sound = setting.getBoolean("prefSound", true);
                 Var.Trans = Integer.parseInt(setting.getString("prefTrans", "0"));
-                Log.d("Trans"," "+Var.Trans);
-                Log.d("Rate"," "+Var.RefreshRate);
-                Log.d("Noti"," "+Var.Noti);
-                Log.d("Sound"," "+Var.Sound);
+                Log.d("Trans", " " + Var.Trans);
+                Log.d("Rate", " " + Var.RefreshRate);
+                Log.d("Noti", " " + Var.Noti);
+                Log.d("Sound", " " + Var.Sound);
 
+            }
+        });
+        floatingActionButton3.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Drive.class);
+                startActivity(intent);
             }
         });
 
