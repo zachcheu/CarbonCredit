@@ -3,4 +3,6 @@
     <string name="app_name">CarbonCredit</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="access_token">pk.eyJ1IjoicmlmYXRyYXNoaWQiLCJhIjoiY2l1N2ExZTRkMDAwOTJ0bzJqNGh6Y2pqMSJ9.k1xrN9kP-1eAA9ozb3dysQ</string>
+
 </resources>

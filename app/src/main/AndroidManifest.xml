@@ -29,8 +29,11 @@
         <activity android:name=".MyPreferencesActivity"
             />
         <activity
-            android:name=".Drive"
+            android:name=".Map"
             >
+
+        </activity>
+        <activity android:name=".Drive">
 
         </activity>
     </application>
