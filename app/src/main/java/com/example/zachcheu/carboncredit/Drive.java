@@ -14,6 +14,7 @@ public class Drive extends Activity implements LocationListener {
     // gets context location!
     private LocationManager lm;
     private TextView textView;
+    private Long start_time;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +24,7 @@ public class Drive extends Activity implements LocationListener {
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Typeface typeface = Typeface.createFromAsset(getAssets(), "gothic.ttf");
         textView.setTypeface(typeface);
-        //test
+        start_time = System.currentTimeMillis();
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 1, this);
     }
 
@@ -32,7 +33,7 @@ public class Drive extends Activity implements LocationListener {
         Drive.this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                drivePointManager.addPoint(new DrivePoint(0.0f, (int)(location.getSpeed() * 2.2369), location, false));
+                drivePointManager.addPoint(new DrivePoint(System.currentTimeMillis()-start_time, (int)(location.getSpeed() * 2.2369), location, false));
             }
         });
     }
