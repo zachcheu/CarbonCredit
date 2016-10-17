@@ -12,20 +12,45 @@
     tools:context="com.example.zachcheu.carboncredit.Map">
 
 
-    <TextView
-        android:text="0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/speed"
-        android:fontFamily="serif-monospace"
-        android:textSize="75dp" />
-
     <com.github.clans.fab.FloatingActionButton
         android:id="@+id/floating_logs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/pause"/>
+        android:src="@mipmap/pause"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="MPH:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/MPH"
+        android:fontFamily="serif-monospace"
+        android:textSize="75dp"
+        android:layout_marginStart="37dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/speed"
+        android:fontFamily="serif-monospace"
+        android:textSize="75dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="53dp" />
+
+    <TextView
+        android:text="Drive in Progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Calculating"
+        android:fontFamily="serif-monospace"
+        android:textSize="36sp"
+        android:layout_marginTop="80dp"
+        android:layout_below="@+id/MPH"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
