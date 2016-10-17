@@ -1,6 +1,5 @@
 package com.example.zachcheu.carboncredit;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class PointsToCred {
@@ -103,6 +102,6 @@ public class PointsToCred {
         return small;
     }
     public int returnCreditEffi(){
-
+        return CarbonCred;
     }
 }
