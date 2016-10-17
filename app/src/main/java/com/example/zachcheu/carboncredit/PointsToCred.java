@@ -4,17 +4,18 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class PointsToCred {
+    //test
 
-    private static ArrayList<DrivePoints> list;
+    private static ArrayList<DrivePoint> list;
     private int CreditEffi;
     private int CreditIdle;
     private int CreditLimit;
     private int CreditAccel;
     private int CarbonCred;
-    public PointsToCred(ArrayList<DrivePoints> list){
-        list = this.list; // waiting for Rifat's code and DrivePoints object
+    public PointsToCred(ArrayList<DrivePoint> list){
+        list = this.list; // waiting for Rifat's code and DrivePoint object
         CreditEffi = CreditCarEffi();
-        CreditIdle = CreditCarIdle();
+        CreditIdle = (int)CreditCarIdle();
         CreditLimit = CreditCarLimit();
         CreditAccel = CreditCarAccel();
         CarbonCred = 50 + CreditEffi + CreditIdle + CreditLimit + CreditAccel;
@@ -22,10 +23,10 @@ public class PointsToCred {
     public static int CreditCarEffi(){
         return Var.avgMph-Var.carsMph[Var.Trans]*(2/3);
     }
-    public static int CreditCarIdle(){
-        int time1 = 0;
-        int time2 = 0;
-        int timeTot = 0;
+    public static float CreditCarIdle(){
+        float time1 = 0;
+        float time2 = 0;
+        float timeTot = 0;
         for(int i = 0; i< list.size();i++){
             if(list.get(i).getSpeed().equals(0)){
                 time1 = list.get(i).getTime();
@@ -45,7 +46,7 @@ public class PointsToCred {
         int down = 0;
         int totSpeed = 0;
         for(int i = 0; i<list.size();i++){
-            if(list.get(i).getHighway()){
+            if(list.get(i).isHighway()){
                 up = Var.highUp;
                 down = Var.highDown;
             }else{

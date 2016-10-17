@@ -23,7 +23,7 @@ public class Drive extends Activity implements LocationListener {
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Typeface typeface = Typeface.createFromAsset(getAssets(), "gothic.ttf");
         textView.setTypeface(typeface);
-
+        //test
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 1, this);
     }
 
@@ -32,8 +32,7 @@ public class Drive extends Activity implements LocationListener {
         Drive.this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Log.d("Test"," "+location.getSpeed());
-                textView.setText(String.valueOf((location.getSpeed()*2.2369)));
+                drivePointManager.addPoint(new DrivePoint(0.0f, (int)(location.getSpeed() * 2.2369), location, false));
             }
         });
     }
