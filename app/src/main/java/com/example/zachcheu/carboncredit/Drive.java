@@ -33,7 +33,7 @@ public class Drive extends Activity implements LocationListener {
         Drive.this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                drivePointManager.addPoint(new DrivePoint(System.currentTimeMillis()-start_time, (int)(location.getSpeed() * 2.2369), location, false));
+                    drivePointManager.addPoint(new DrivePoint(System.currentTimeMillis()-start_time, (int)(location.getSpeed() * 2.2369), location, false));
             }
         });
     }

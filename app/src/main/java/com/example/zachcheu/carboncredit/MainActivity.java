@@ -24,11 +24,9 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         getActionBar().hide();
         materialDesignFAM = (FloatingActionMenu) findViewById(R.id.social_floating_menu);
-        floatingActionButton1 = (FloatingActionButton) findViewById(R.id.floating_start);
+        floatingActionButton1 = (FloatingActionButton) findViewById(R.id.floating_settings);
         floatingActionButton2 = (FloatingActionButton) findViewById(R.id.floating_logs);
-        floatingActionButton3 = (FloatingActionButton) findViewById(R.id.floating_settings);
         final SharedPreferences setting = PreferenceManager.getDefaultSharedPreferences(this);
-
         floatingActionButton1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MyPreferencesActivity.class);
@@ -48,13 +46,6 @@ public class MainActivity extends Activity {
 
             }
         });
-        floatingActionButton3.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Drive.class);
-                startActivity(intent);
-            }
-        });
-
     }
 
     @Override

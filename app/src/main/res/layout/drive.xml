@@ -9,7 +9,7 @@
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
-    tools:context="com.example.zachcheu.carboncredit.Map">
+>
 
 
     <com.github.clans.fab.FloatingActionButton
@@ -27,8 +27,7 @@
         android:id="@+id/MPH"
         android:fontFamily="serif-monospace"
         android:textSize="75dp"
-        android:layout_marginStart="37dp"
-        android:layout_alignParentTop="true"
+        android:layout_alignTop="@+id/floating_logs"
         android:layout_alignParentStart="true" />
 
     <TextView
@@ -38,19 +37,8 @@
         android:id="@+id/speed"
         android:fontFamily="serif-monospace"
         android:textSize="75dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="53dp" />
-
-    <TextView
-        android:text="Drive in Progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/Calculating"
-        android:fontFamily="serif-monospace"
-        android:textSize="36sp"
-        android:layout_marginTop="80dp"
-        android:layout_below="@+id/MPH"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignBaseline="@+id/MPH"
+        android:layout_alignBottom="@+id/MPH"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

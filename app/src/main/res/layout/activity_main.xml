@@ -50,15 +50,6 @@
         fab:menu_showShadow="true">
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/floating_start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/close"
-            fab:fab_size="mini"
-            fab:menu_fab_label="Start Drive"/>
-
-
-        <com.github.clans.fab.FloatingActionButton
             android:id="@+id/floating_logs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
