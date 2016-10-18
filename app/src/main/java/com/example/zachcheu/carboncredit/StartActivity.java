@@ -1,6 +1,7 @@
 package com.example.zachcheu.carboncredit;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -26,6 +27,13 @@ public class StartActivity extends Activity{
         buttonView.setVisibility(View.GONE);
         start = (FloatingActionButton) findViewById(R.id.floating_start);
         animationFadeIn = AnimationUtils.loadAnimation(getApplicationContext(),android.R.anim.fade_in);
+        start.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(StartActivity.this, Drive.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

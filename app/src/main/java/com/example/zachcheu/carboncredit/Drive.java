@@ -15,6 +15,7 @@ public class Drive extends Activity implements LocationListener {
     private LocationManager lm;
     private TextView textView;
     private Long start_time;
+    private drivePointManager manager = new drivePointManager();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +34,7 @@ public class Drive extends Activity implements LocationListener {
         Drive.this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                    drivePointManager.addPoint(new DrivePoint(System.currentTimeMillis()-start_time, (int)(location.getSpeed() * 2.2369), location, false));
+                manager.addPoint(new DrivePoint(System.currentTimeMillis()-start_time, (int)(location.getSpeed() * 2.2369), location, false));
             }
         });
     }

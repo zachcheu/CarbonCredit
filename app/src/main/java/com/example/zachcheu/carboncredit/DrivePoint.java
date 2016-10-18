@@ -51,10 +51,6 @@ public class DrivePoint {
         this.time = time;
     }
 
-    public DrivePoint() {
-
-    }
-
     public DrivePoint(float time, Integer speed, Location mLocation, boolean isHighway) {
         this.time = time;
         this.speed = speed;
