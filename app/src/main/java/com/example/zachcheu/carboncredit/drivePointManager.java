@@ -6,17 +6,16 @@ import java.util.ArrayList;
  * Created by DevWork on 10/16/16.
  */
 
-public class drivePointManager {
-    //test
+public class DrivePointManager {
 
-    static ArrayList<DrivePoint> points;
+    ArrayList<DrivePoint> points;
 
-    public drivePointManager() {
+    public DrivePointManager() {
         points = new ArrayList<DrivePoint>();
     }
 
-    public static void addPoint(DrivePoint d) {
-        points.add(d);
+    public void addPoint(DrivePoint d) {
+        this.points.add(d);
     }
 
     public DrivePoint getDrivePoint(int index){

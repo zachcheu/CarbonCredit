@@ -7,7 +7,6 @@ import android.location.Location;
  */
 
 public class DrivePoint {
-    //test
 
     public boolean isHighway() {
         return isHighway;
@@ -49,6 +48,10 @@ public class DrivePoint {
 
     public void setTime(float time) {
         this.time = time;
+    }
+
+    public DrivePoint() {
+
     }
 
     public DrivePoint(float time, Integer speed, Location mLocation, boolean isHighway) {
