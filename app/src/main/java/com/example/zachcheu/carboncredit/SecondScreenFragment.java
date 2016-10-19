@@ -1,9 +1,9 @@
 package com.example.zachcheu.carboncredit;
 
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.Display;
@@ -18,17 +18,26 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 
 public class SecondScreenFragment extends Fragment{
-    SharedPreferences pref;
     public static final String ARG_OBJECT = "object";
     LineChart CarbonChart;
-    ArrayList<Integer> list;
-    Set<String> set;
+    LineDataSet dataSet;
+    LineData lineData;
+    File f;
+    FileReader r;
+    BufferedReader b;
+    int index;
+    ArrayList<String> data = new ArrayList<String>();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View rootView = inflater.inflate(R.layout.screen2, container, false);
@@ -49,14 +58,6 @@ public class SecondScreenFragment extends Fragment{
         CarbonChart.getLayoutParams().height=size.y/3;
 
         //initialize chart and data within chart
-        List<Entry> entries = new ArrayList<Entry>();
-        for(int i = 0;i<list.size();i++){
-            //entries.add(new Entry(i,list.get(i).getCarbonCredit()));
-            entries.add(new Entry(i,list.get(i)));
-        }
-        LineDataSet dataSet = new LineDataSet(entries,"carbon");
-        LineData lineData = new LineData(dataSet);
-        CarbonChart.setData(lineData);
         CarbonChart.setLogEnabled(true);
         CarbonChart.moveViewToX(0f);
 
@@ -89,7 +90,28 @@ public class SecondScreenFragment extends Fragment{
     }
     @Override
     public void onResume() {
-        list.add(pref.getInt("data", 0));
+        f = new File(Environment.getDataDirectory()+File.separator+"file.txt");
+        String out = "";
+        String k="";
+        try {
+            r = new FileReader(f);
+            b = new BufferedReader(r);
+            while((out=b.readLine())!=null){
+                data.add(out);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        List<Entry> entries = new ArrayList<Entry>();
+        for(int i = 0;i<data.size();i++){
+            index = data.get(i).indexOf(",");
+            entries.add(new Entry(i,Float.valueOf(data.get(i).substring(index))));
+        }
+        dataSet = new LineDataSet(entries,"carbon");
+        lineData = new LineData(dataSet);
+        CarbonChart.setData(lineData);
         super.onResume();
     }
 }

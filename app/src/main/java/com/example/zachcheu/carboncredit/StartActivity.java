@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
 import me.relex.circleindicator.CircleIndicator;
 
 /**
@@ -21,6 +25,13 @@ public class StartActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_activity);
+        try {
+            PrintWriter writer = new PrintWriter("file.txt", "UTF-8");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         collectionPageAdapter = new CollectionPagerAdapter(getSupportFragmentManager());
         defaultViewPager = (ViewPager) findViewById(R.id.viewpager_default);
         defaultViewPager.setOffscreenPageLimit(2);

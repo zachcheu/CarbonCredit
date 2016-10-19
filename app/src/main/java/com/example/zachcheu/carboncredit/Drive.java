@@ -2,14 +2,15 @@ package com.example.zachcheu.carboncredit;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.SystemClock;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.mapbox.mapboxsdk.MapboxAccountManager;
@@ -22,10 +23,12 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.R.id.edit;
 
 public class Drive extends Activity implements LocationListener {
 
@@ -34,6 +37,12 @@ public class Drive extends Activity implements LocationListener {
     private TextView textView;
     public MapView mapView;
     public DrivePointManager drivePointManager;
+    File file;
+    FileWriter fw;
+    BufferedWriter bw;
+
+    public Drive() throws IOException {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +55,18 @@ public class Drive extends Activity implements LocationListener {
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Typeface typeface = Typeface.createFromAsset(getAssets(), "gothic.ttf");
         textView.setTypeface(typeface);
-
+        try{
+            file = new File(Environment.getExternalStorageDirectory()+File.separator+"file.txt");
+            if(file.createNewFile()){
+                System.out.println("EXISTS");
+            }else{
+                System.out.println("GONE");
+            }
+            fw = new FileWriter(file, true);
+            bw = new BufferedWriter(fw);
+        }catch(Exception e){
+            Log.d("Exception",e.toString());
+        }
         mapView = (MapView) findViewById(R.id.mapview);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(new OnMapReadyCallback() {
@@ -154,6 +174,11 @@ public class Drive extends Activity implements LocationListener {
                 (int) (location.getSpeed() * 2.2369),
                 location,
                 false));
+        try{
+            bw.write(""+(location.getSpeed()*2.2369)+","+new PointsToCred(drivePointManager.getDriveList()).getCarbonCredit());
+        }catch(Exception e){
+            Log.d("Exception",e.toString());
+        }
 
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
