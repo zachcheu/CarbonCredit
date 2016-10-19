@@ -34,8 +34,11 @@ public class StartActivity extends AppCompatActivity{
         /*
          * Gradual color shift from page to page test!
          */
+    }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
     private class CustomOnPageListener implements ViewPager.OnPageChangeListener{
 

@@ -2,6 +2,7 @@ package com.example.zachcheu.carboncredit;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.location.Location;
@@ -24,6 +25,8 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.R.id.edit;
+
 public class Drive extends Activity implements LocationListener {
 
     // gets context location!
@@ -36,8 +39,8 @@ public class Drive extends Activity implements LocationListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MapboxAccountManager.start(this, getString(R.string.access_token));
-        setContentView(R.layout.drive);
 
+        setContentView(R.layout.drive);
         drivePointManager = new DrivePointManager();
         textView = (TextView) findViewById(R.id.speedView);
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -50,34 +53,38 @@ public class Drive extends Activity implements LocationListener {
             @Override
             public void onMapReady(MapboxMap mapboxMap) {
                 // this is where we interact with the map
-                mapboxMap.setStyleUrl(Style.LIGHT);
+                mapboxMap.setStyleUrl(Style.MAPBOX_STREETS);
                 //mapboxMap.setMaxZoom(10);
                 mapboxMap.setMyLocationEnabled(true);
 
                 CameraPosition cameraPosition = new CameraPosition.Builder()
                         .target(new LatLng(mapboxMap.getMyLocation().getLatitude(), mapboxMap.getMyLocation().getLongitude()))
-                        .zoom(17)
+                        .zoom(13)
                         .bearing(180)
                         .tilt(30)
                         .build();
-                mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition), 7000);
+                mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition), 5000);
                 addPoints(mapboxMap);
 
+                mapboxMap.getUiSettings().setTiltGesturesEnabled(false);
                 //mapboxMap.easeCamera(CameraUpdateFactory.newCameraPosition());
             }
         });
 
-        // lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 1, this);
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 1, this);
         System.currentTimeMillis();
 
     }
 
     //drawing points test
     private void addPoints(final MapboxMap mapboxMap) {
+
+
         final List<LatLng> c = new ArrayList<>();
         c.add(new LatLng((double) (47.673988), (double) (-122.121513)));
         c.add(new LatLng((double) (40.730610), (double) (-73.935242)));
         c.add(new LatLng((double) (47.673988), (double) (-122.121513)));
+
 
         Drive.this.runOnUiThread(new Runnable() {
             @Override
@@ -85,11 +92,57 @@ public class Drive extends Activity implements LocationListener {
                 mapboxMap.addPolyline(new PolylineOptions()
                         .addAll(c)
                         .width(10)
-                        .color(Color.parseColor("#191919"))) ;
+                        .color(Color.parseColor("#3498db")));
             }
         });
     }
 
+    private void addLine() {
+
+        final DrivePoint lastPoint = drivePointManager.getLastPoint();
+        final DrivePoint secondtoLastPoint = drivePointManager.getSecondToLastPoint();
+        if (lastPoint == null) {
+            return;
+        }else{
+
+        }
+        if (secondtoLastPoint == null) {
+            return;
+        }else{
+
+        }
+        int speed1 = lastPoint.getSpeed();
+        int speed2 = secondtoLastPoint.getSpeed();
+
+        // calculate average speed between two points
+        int averageSpeed = (speed1 + speed2)/2;
+
+        final int color;
+
+        /*
+         * Determine color condition
+         */
+        if(averageSpeed >= 0 && averageSpeed < 25){
+            color = Color.parseColor("#2ecc71");
+        }else if (averageSpeed >= 25 && averageSpeed <= 40){
+            color = Color.parseColor("#e67e22");
+        }else{
+            color = Color.parseColor("#c0392b");
+        }
+
+
+        mapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(MapboxMap mapboxMap) {
+                mapboxMap.addPolyline(new PolylineOptions()
+                        .add(new LatLng(secondtoLastPoint.getmLocation().getLatitude(), secondtoLastPoint.getmLocation().getLongitude()))
+                        .add(new LatLng(lastPoint.getmLocation().getLatitude(), lastPoint.getmLocation().getLongitude()))
+                        .add(new LatLng(secondtoLastPoint.getmLocation().getLatitude(), secondtoLastPoint.getmLocation().getLongitude()))
+                        .width(5)
+                        .color(color));
+            }
+        });
+    }
 
 
     @Override
@@ -98,9 +151,21 @@ public class Drive extends Activity implements LocationListener {
         //@ last param: isHighway...still need google maps api for this to work
         drivePointManager.addPoint(new DrivePoint(
                 0.0f,
-                (int)(location.getSpeed() * 2.2369),
+                (int) (location.getSpeed() * 2.2369),
                 location,
                 false));
+
+        mapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(MapboxMap mapboxMap) {
+                System.out.println("test1");
+            }
+        });
+
+        /*
+         * adds line to map view
+         */
+        addLine();
 
         Drive.this.runOnUiThread(new Runnable() {
             @Override
@@ -110,6 +175,7 @@ public class Drive extends Activity implements LocationListener {
             }
         });
     }
+
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -156,11 +222,10 @@ public class Drive extends Activity implements LocationListener {
         mapView.onDestroy();
     }
 
-    public void startTimer(){
+    public void startTimer() {
 
     }
-
-    public void stopTimer(){
+    public void stopTimer() {
         SystemClock s;
     }
 }

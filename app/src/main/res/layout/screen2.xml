@@ -5,4 +5,12 @@
     android:background="#ecf0f1"
     android:elevation="0dp">
 
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/carbonchart"
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        >
+
+    </com.github.mikephil.charting.charts.LineChart>
+
 </RelativeLayout>

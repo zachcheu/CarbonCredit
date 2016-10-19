@@ -3,7 +3,6 @@ package com.example.zachcheu.carboncredit;
 import java.util.ArrayList;
 
 public class PointsToCred {
-    //test
 
     private static ArrayList<DrivePoint> list;
     private int CreditEffi;
@@ -12,12 +11,14 @@ public class PointsToCred {
     private int CreditAccel;
     private int CarbonCred;
     public PointsToCred(ArrayList<DrivePoint> list){
-        list = this.list; // waiting for Rifat's code and DrivePoint object
-        CreditEffi = CreditCarEffi();
-        CreditIdle = (int)CreditCarIdle();
-        CreditLimit = CreditCarLimit();
-        CreditAccel = CreditCarAccel();
-        CarbonCred = 50 + CreditEffi + CreditIdle + CreditLimit + CreditAccel;
+        this.list = list;
+        if(list.size()>2) {
+            CreditEffi = CreditCarEffi();
+            CreditIdle = (int) CreditCarIdle();
+            CreditLimit = CreditCarLimit();
+            CreditAccel = CreditCarAccel();
+            CarbonCred = 50 + CreditEffi + CreditIdle + CreditLimit + CreditAccel;
+        }
     }
     public static int CreditCarEffi(){
         return Var.avgMph-Var.carsMph[Var.Trans]*(2/3);
@@ -38,7 +39,7 @@ public class PointsToCred {
             }
             timeTot +=time2-time1;
         }
-        return (Var.idleBase-(list.get(list.size()).getTime()-timeTot))*10;
+        return (Var.idleBase-(list.get(list.size()-1).getTime()-timeTot))*10;
     }
     public static int CreditCarLimit(){
         int up = 0;

@@ -13,10 +13,6 @@ import android.view.animation.AnimationUtils;
 
 import com.github.clans.fab.FloatingActionButton;
 
-/**
- * Created by DevWork on 10/17/16.
- */
-
 public class FirstScreenFragment extends Fragment {
     public static final String ARG_OBJECT = "object";
     private View buttonView = null;
