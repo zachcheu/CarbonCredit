@@ -37,9 +37,6 @@ public class Drive extends Activity implements LocationListener {
     private TextView textView;
     public MapView mapView;
     public DrivePointManager drivePointManager;
-    File file;
-    FileWriter fw;
-    BufferedWriter bw;
 
     public Drive() throws IOException {
     }
@@ -55,18 +52,7 @@ public class Drive extends Activity implements LocationListener {
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Typeface typeface = Typeface.createFromAsset(getAssets(), "gothic.ttf");
         textView.setTypeface(typeface);
-        try{
-            file = new File(Environment.getExternalStorageDirectory()+File.separator+"file.txt");
-            if(file.createNewFile()){
-                System.out.println("EXISTS");
-            }else{
-                System.out.println("GONE");
-            }
-            fw = new FileWriter(file, true);
-            bw = new BufferedWriter(fw);
-        }catch(Exception e){
-            Log.d("Exception",e.toString());
-        }
+
         mapView = (MapView) findViewById(R.id.mapview);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(new OnMapReadyCallback() {
@@ -174,11 +160,6 @@ public class Drive extends Activity implements LocationListener {
                 (int) (location.getSpeed() * 2.2369),
                 location,
                 false));
-        try{
-            bw.write(""+(location.getSpeed()*2.2369)+","+new PointsToCred(drivePointManager.getDriveList()).getCarbonCredit());
-        }catch(Exception e){
-            Log.d("Exception",e.toString());
-        }
 
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
@@ -243,6 +224,11 @@ public class Drive extends Activity implements LocationListener {
 
     @Override
     protected void onDestroy() {
+        if(FileHelper.saveToFile(""+new PointsToCred(drivePointManager.getDriveList()).getCarbonCredit())){
+            System.out.println("SAVED TO FILE");
+        }else{
+            System.out.println("FAILED");
+        }
         super.onDestroy();
         mapView.onDestroy();
     }

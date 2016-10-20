@@ -3,7 +3,6 @@ package com.example.zachcheu.carboncredit;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.Display;
@@ -20,9 +19,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +33,7 @@ public class SecondScreenFragment extends Fragment{
     FileReader r;
     BufferedReader b;
     int index;
-    ArrayList<String> data = new ArrayList<String>();
+    ArrayList<Integer> data = new ArrayList<Integer>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -90,7 +87,9 @@ public class SecondScreenFragment extends Fragment{
     }
     @Override
     public void onResume() {
-        f = new File(Environment.getDataDirectory()+File.separator+"file.txt");
+        data = FileHelper.ReadFile(getContext());
+
+        /*f = new File(Environment.getDataDirectory()+File.separator+"file.txt");
         String out = "";
         String k="";
         try {
@@ -103,13 +102,12 @@ public class SecondScreenFragment extends Fragment{
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
         List<Entry> entries = new ArrayList<Entry>();
         for(int i = 0;i<data.size();i++){
-            index = data.get(i).indexOf(",");
-            entries.add(new Entry(i,Float.valueOf(data.get(i).substring(index))));
+            entries.add(new Entry(i,data.get(i)));
         }
-        dataSet = new LineDataSet(entries,"carbon");
+        dataSet = new LineDataSet(entries,"Carbon Credit");
         lineData = new LineData(dataSet);
         CarbonChart.setData(lineData);
         super.onResume();

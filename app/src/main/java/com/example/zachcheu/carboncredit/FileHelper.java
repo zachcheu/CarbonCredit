@@ -11,15 +11,16 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class FileHelper {
-    final static String fileName = "data.txt";
-    final static String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/instinctcoder/readwrite/" ;
+    final static String fileName = "/data.txt";
+    final static String path = Environment.getExternalStorageDirectory() + "/files" ;
     final static String TAG = FileHelper.class.getName();
 
-    public static  String ReadFile( Context context){
+    public static ArrayList<Integer> ReadFile(Context context){
         String line = null;
-
+        ArrayList<Integer> list = new ArrayList<Integer>();
         try {
             FileInputStream fileInputStream = new FileInputStream (new File(path + fileName));
             InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
@@ -29,6 +30,7 @@ public class FileHelper {
             while ( (line = bufferedReader.readLine()) != null )
             {
                 stringBuilder.append(line + System.getProperty("line.separator"));
+                list.add(Integer.parseInt(line));
             }
             fileInputStream.close();
             line = stringBuilder.toString();
@@ -41,19 +43,18 @@ public class FileHelper {
         catch(IOException ex) {
             Log.d(TAG, ex.getMessage());
         }
-        return line;
+        return list;
     }
 
-    public static boolean saveToFile( String data){
+    public static boolean saveToFile(String data){
         try {
-            new File(path  ).mkdir();
+            new File(path).mkdir();
             File file = new File(path+ fileName);
             if (!file.exists()) {
                 file.createNewFile();
             }
             FileOutputStream fileOutputStream = new FileOutputStream(file,true);
             fileOutputStream.write((data + System.getProperty("line.separator")).getBytes());
-
             return true;
         }  catch(FileNotFoundException ex) {
             Log.d(TAG, ex.getMessage());
