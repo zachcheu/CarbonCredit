@@ -9,6 +9,7 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -26,14 +27,20 @@ import java.util.List;
 
 public class SecondScreenFragment extends Fragment{
     public static final String ARG_OBJECT = "object";
-    LineChart CarbonChart;
-    LineDataSet dataSet;
-    LineData lineData;
-    File f;
-    FileReader r;
-    BufferedReader b;
-    int index;
-    ArrayList<Integer> data = new ArrayList<Integer>();
+    private LineChart CarbonChart;
+    private LineDataSet dataSet;
+    private LineData lineData;
+    private ListView list;
+    private List<Log> log = new ArrayList<Log>();
+    private CustomListAdapter adapter;
+    private File f;
+    private FileReader r;
+    private BufferedReader b;
+    private ArrayList<Integer> carbonData = new ArrayList<Integer>();
+    private ArrayList<Integer> distanceData = new ArrayList<Integer>();
+    private ArrayList<Integer> driveTimeData = new ArrayList<Integer>();
+    private ArrayList<Integer> timeData = new ArrayList<Integer>();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -52,7 +59,13 @@ public class SecondScreenFragment extends Fragment{
         Point size = new Point();
         display.getSize(size);
         CarbonChart = (LineChart) getActivity().findViewById(R.id.carbonchart);
+        list = (ListView) getActivity().findViewById(R.id.list);
         CarbonChart.getLayoutParams().height=size.y/3;
+        list.getLayoutParams().height=size.y*2/3;
+        adapter = new CustomListAdapter(getActivity(),log);
+        list.setAdapter(adapter);
+        updateList();
+
 
         //initialize chart and data within chart
         CarbonChart.setLogEnabled(true);
@@ -85,31 +98,34 @@ public class SecondScreenFragment extends Fragment{
         CarbonChart.getAxisRight().setEnabled(false);
         CarbonChart.invalidate();
     }
-    @Override
-    public void onResume() {
-        data = FileHelper.ReadFile(getContext());
 
-        /*f = new File(Environment.getDataDirectory()+File.separator+"file.txt");
-        String out = "";
-        String k="";
-        try {
-            r = new FileReader(f);
-            b = new BufferedReader(r);
-            while((out=b.readLine())!=null){
-                data.add(out);
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
+    private void updateList() {
+        carbonData = FileHelper.ReadCarbon(getContext());
+        driveTimeData = FileHelper.ReadDriveTime(getContext());
+        timeData = FileHelper.ReadTime(getContext());
+        distanceData = FileHelper.ReadDistance(getContext());
         List<Entry> entries = new ArrayList<Entry>();
-        for(int i = 0;i<data.size();i++){
-            entries.add(new Entry(i,data.get(i)));
+        for(int i = 0;i<carbonData.size();i++){
+            entries.add(new Entry(i,carbonData.get(i)));
         }
         dataSet = new LineDataSet(entries,"Carbon Credit");
         lineData = new LineData(dataSet);
         CarbonChart.setData(lineData);
+        this.log.clear();
+        for(int i = 0; i<carbonData.size();i++){
+            Log data = new Log();
+            data.setCredit("Carbon Credit: " + carbonData.get(i));
+            data.setTime(driveTimeData.get(i));
+            data.setDate(timeData.get(i));
+            data.setDist(distanceData.get(i));
+            this.log.add(data);
+        }
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onResume() {
+        updateList();
         super.onResume();
     }
 }

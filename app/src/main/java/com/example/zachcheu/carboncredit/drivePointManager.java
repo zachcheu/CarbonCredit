@@ -38,4 +38,22 @@ public class DrivePointManager {
     public ArrayList<DrivePoint> getDriveList(){
         return points;
     }
+    public int getDriveTime(){
+        //fix when time is understood
+        return Math.round(points.get(points.size()-1).getTime());
+    }
+    public int getAverageSpeed(){
+        int total = 0;
+        for(int i = 0; i<points.size();i++){
+            total += points.get(i).getSpeed();
+        }
+        return total/points.size();
+    }
+    public int getDistance(){
+        //fix when time is understood
+        return getAverageSpeed()*getDriveTime();
+    }
+    public float sinceDrive(){
+        return Math.round(points.get(1).getTime());
+    }
 }

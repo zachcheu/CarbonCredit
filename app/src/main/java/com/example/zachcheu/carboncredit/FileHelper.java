@@ -18,9 +18,12 @@ public class FileHelper {
     final static String path = Environment.getExternalStorageDirectory() + "/files" ;
     final static String TAG = FileHelper.class.getName();
 
-    public static ArrayList<Integer> ReadFile(Context context){
+    public static ArrayList<Integer> ReadCarbon(Context context){
         String line = null;
         ArrayList<Integer> list = new ArrayList<Integer>();
+        int start = 0;
+        int end = 0;
+        int spaceIndex = 1;
         try {
             FileInputStream fileInputStream = new FileInputStream (new File(path + fileName));
             InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
@@ -30,7 +33,130 @@ public class FileHelper {
             while ( (line = bufferedReader.readLine()) != null )
             {
                 stringBuilder.append(line + System.getProperty("line.separator"));
-                list.add(Integer.parseInt(line));
+                for(int i = 0; i<spaceIndex;i++){
+                    if(end == 0){
+                        start = 0;
+                    }else{
+                        start = line.indexOf(' ',end);
+                    }
+                    end = line.indexOf(' ',start);
+                }
+                list.add(Integer.parseInt(line.substring(start,end)));
+            }
+            fileInputStream.close();
+            line = stringBuilder.toString();
+
+            bufferedReader.close();
+        }
+        catch(FileNotFoundException ex) {
+            Log.d(TAG, ex.getMessage());
+        }
+        catch(IOException ex) {
+            Log.d(TAG, ex.getMessage());
+        }
+        return list;
+    }
+    public static ArrayList<Integer> ReadDriveTime(Context context){
+        String line = null;
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        int start = 0;
+        int end = 0;
+        int spaceIndex = 2;
+        try {
+            FileInputStream fileInputStream = new FileInputStream (new File(path + fileName));
+            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            StringBuilder stringBuilder = new StringBuilder();
+
+            while ( (line = bufferedReader.readLine()) != null )
+            {
+                stringBuilder.append(line + System.getProperty("line.separator"));
+                for(int i = 0; i<spaceIndex;i++){
+                    if(end == 0){
+                        start = 0;
+                    }else{
+                        start = end;
+                    }
+                    end = line.indexOf(' ',start);
+                }
+                System.out.println(line.substring(start,end));
+                list.add(Integer.parseInt(line.substring(start,end)));
+            }
+            fileInputStream.close();
+            line = stringBuilder.toString();
+
+            bufferedReader.close();
+        }
+        catch(FileNotFoundException ex) {
+            Log.d(TAG, ex.getMessage());
+        }
+        catch(IOException ex) {
+            Log.d(TAG, ex.getMessage());
+        }
+        return list;
+    }
+    public static ArrayList<Integer> ReadDistance(Context context){
+        String line = null;
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        int start = 0;
+        int end = 0;
+        int spaceIndex = 3;
+        try {
+            FileInputStream fileInputStream = new FileInputStream (new File(path + fileName));
+            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            StringBuilder stringBuilder = new StringBuilder();
+
+            while ( (line = bufferedReader.readLine()) != null )
+            {
+                stringBuilder.append(line + System.getProperty("line.separator"));
+                for(int i = 0; i<spaceIndex;i++){
+                    if(end == 0){
+                        start = 0;
+                    }else{
+                        start = end;
+                    }
+                    end = line.indexOf(' ',start);
+                }
+                list.add(Integer.parseInt(line.substring(start,end)));
+            }
+            fileInputStream.close();
+            line = stringBuilder.toString();
+
+            bufferedReader.close();
+        }
+        catch(FileNotFoundException ex) {
+            Log.d(TAG, ex.getMessage());
+        }
+        catch(IOException ex) {
+            Log.d(TAG, ex.getMessage());
+        }
+        return list;
+    }
+    public static ArrayList<Integer> ReadTime(Context context){
+        String line = null;
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        int start = 0;
+        int end = 0;
+        int spaceIndex = 4;
+        try {
+            FileInputStream fileInputStream = new FileInputStream (new File(path + fileName));
+            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            StringBuilder stringBuilder = new StringBuilder();
+
+            while ( (line = bufferedReader.readLine()) != null )
+            {
+                stringBuilder.append(line + System.getProperty("line.separator"));
+                for(int i = 0; i<spaceIndex;i++){
+                    if(end == 0){
+                        start = 0;
+                    }else{
+                        start = end;
+                    }
+                    end = line.indexOf(' ',start);
+                }
+                list.add(Integer.parseInt(line.substring(start,end)));
             }
             fileInputStream.close();
             line = stringBuilder.toString();
