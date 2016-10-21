@@ -53,7 +53,7 @@ public class DrivePointManager {
         //fix when time is understood
         return getAverageSpeed()*getDriveTime();
     }
-    public float sinceDrive(){
+    public int sinceDrive(){
         return Math.round(points.get(1).getTime());
     }
 }

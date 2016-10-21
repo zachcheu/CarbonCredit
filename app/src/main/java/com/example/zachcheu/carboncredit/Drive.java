@@ -224,10 +224,12 @@ public class Drive extends Activity implements LocationListener {
 
     @Override
     protected void onDestroy() {
-        if(FileHelper.saveToFile(""+new PointsToCred(drivePointManager.getDriveList()).getCarbonCredit()+" "+ drivePointManager.getDriveTime()+" "+ drivePointManager.getDistance()+" "+drivePointManager.sinceDrive()+" ")){
-            System.out.println("SAVED TO FILE");
-        }else{
-            System.out.println("FAILED");
+        if(drivePointManager.getDriveList().size() > 2){
+            if(FileHelper.saveToFile(""+new PointsToCred(drivePointManager.getDriveList()).getCarbonCredit()+" "+ drivePointManager.getDriveTime()+" "+ drivePointManager.getDistance()+" "+drivePointManager.sinceDrive()+" ")){
+                System.out.println("SAVED TO FILE");
+            }else{
+                System.out.println("FAILED");
+            }
         }
         super.onDestroy();
         mapView.onDestroy();

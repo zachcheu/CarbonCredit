@@ -1,6 +1,6 @@
 package com.example.zachcheu.carboncredit;
 public class Log {
-    private String credit, thumbnailUrl;
+    private String credit;
     private int date;
     private double time;
     private int dist;
@@ -8,9 +8,8 @@ public class Log {
     public Log() {
     }
 
-    public Log(String name, String thumbnailUrl, int date, double time, int dist) {
+    public Log(String name, int date, double time, int dist) {
         this.credit = name;
-        this.thumbnailUrl = thumbnailUrl;
         this.date = date;
         this.time = time;
         this.dist = dist;
@@ -22,14 +21,6 @@ public class Log {
 
     public void setCredit(String name) {
         this.credit = name;
-    }
-
-    public String getThumbnailUrl() {
-        return thumbnailUrl;
-    }
-
-    public void setThumbnailUrl(String thumbnailUrl) {
-        this.thumbnailUrl = thumbnailUrl;
     }
 
     public int getDate() {

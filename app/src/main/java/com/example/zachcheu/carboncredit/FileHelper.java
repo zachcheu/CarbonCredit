@@ -75,11 +75,11 @@ public class FileHelper {
                     if(end == 0){
                         start = 0;
                     }else{
-                        start = end;
+                        start = end+1;
                     }
-                    end = line.indexOf(' ',start);
+                    end = line.indexOf(' ',start+1);
                 }
-                System.out.println(line.substring(start,end));
+                System.out.println(start + " " + end);
                 list.add(Integer.parseInt(line.substring(start,end)));
             }
             fileInputStream.close();
@@ -114,9 +114,9 @@ public class FileHelper {
                     if(end == 0){
                         start = 0;
                     }else{
-                        start = end;
+                        start = end+1;
                     }
-                    end = line.indexOf(' ',start);
+                    end = line.indexOf(' ',start+1);
                 }
                 list.add(Integer.parseInt(line.substring(start,end)));
             }
@@ -152,9 +152,9 @@ public class FileHelper {
                     if(end == 0){
                         start = 0;
                     }else{
-                        start = end;
+                        start = end+1;
                     }
-                    end = line.indexOf(' ',start);
+                    end = line.indexOf(' ',start+1);
                 }
                 list.add(Integer.parseInt(line.substring(start,end)));
             }
