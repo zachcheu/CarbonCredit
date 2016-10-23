@@ -6,4 +6,5 @@
     <dimen name="distance">15dip</dimen>
     <dimen name="time">13dip</dimen>
     <dimen name="date">12dip</dimen>
+    <dimen name="graphPad">1000dip</dimen>
 </resources>

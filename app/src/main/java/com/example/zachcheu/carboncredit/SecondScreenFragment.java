@@ -2,15 +2,21 @@ package com.example.zachcheu.carboncredit;
 
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.github.clans.fab.FloatingActionButton;
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -37,9 +43,13 @@ public class SecondScreenFragment extends Fragment{
     private FileReader r;
     private BufferedReader b;
     private ArrayList<Integer> carbonData = new ArrayList<Integer>();
-    private ArrayList<Integer> distanceData = new ArrayList<Integer>();
-    private ArrayList<Integer> driveTimeData = new ArrayList<Integer>();
-    private ArrayList<Integer> timeData = new ArrayList<Integer>();
+    private ArrayList<Float> distanceData = new ArrayList<Float>();
+    private ArrayList<Float> driveTimeData = new ArrayList<Float>();
+    private ArrayList<Float> timeData = new ArrayList<Float>();
+    FloatingActionButton refresh;
+    TextView stringLog, xlabel, ylabel;
+    Typeface gothic;
+    RelativeLayout.LayoutParams params;
 
 
     @Override
@@ -53,15 +63,30 @@ public class SecondScreenFragment extends Fragment{
         super.onViewCreated(view, savedInstanceState);
         Bundle args = getArguments();
         int index = args.getInt(ARG_OBJECT);
-
-
+        RelativeLayout rl = (RelativeLayout) getActivity().findViewById(R.id.screen2);
+        stringLog = (TextView) getActivity().findViewById(R.id.stringLog);
+        ylabel = (TextView) getActivity().findViewById(R.id.ystring);
+        xlabel = (TextView) getActivity().findViewById(R.id.xstring);
+        gothic = Typeface.createFromAsset(getActivity().getAssets(),"gothic.ttf");
+        xlabel.setTypeface(gothic);
+        ylabel.setTypeface(gothic);
+        ylabel.setGravity(Gravity.CENTER);
+        xlabel.setGravity(Gravity.CENTER);
+        stringLog.setTypeface(gothic);
+        stringLog.setTextColor(getResources().getColor(R.color.log_header_color));
+        xlabel.setTextColor(Color.WHITE);
+        ylabel.setTextColor(Color.WHITE);
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
         CarbonChart = (LineChart) getActivity().findViewById(R.id.carbonchart);
         list = (ListView) getActivity().findViewById(R.id.list);
+        refresh = (FloatingActionButton) getActivity().findViewById(R.id.floating_refresh);
+        params = new RelativeLayout.LayoutParams(refresh.getButtonSize(),refresh.getButtonSize());
+        params.bottomMargin = (int)list.getY()-(refresh.getButtonSize()/2);
+        //rl.(refresh,params);
         CarbonChart.getLayoutParams().height=size.y/3;
-        list.getLayoutParams().height=size.y*2/3;
+        list.getLayoutParams().height=size.y*11/20;
         adapter = new CustomListAdapter(getActivity(),log);
         list.setAdapter(adapter);
         updateList();
@@ -80,38 +105,54 @@ public class SecondScreenFragment extends Fragment{
         CarbonChart.setDragEnabled(true);
         CarbonChart.setScaleEnabled(true);
 
-        CarbonChart.setBackgroundColor(Color.LTGRAY);
+        CarbonChart.setBackgroundColor(getResources().getColor(R.color.graph_background));
 
         //axis options
         XAxis x = CarbonChart.getXAxis();
         YAxis y = CarbonChart.getAxisLeft();
         x.setPosition(XAxis.XAxisPosition.BOTTOM);
         x.setDrawGridLines(false);
-        x.setAxisMinValue(0);
-        x.setLabelCount(9);
-        x.setAxisMaxValue(9);//add values for unique increasing data
+        x.setAxisMinValue(1);
+        x.setLabelCount(carbonData.size()-1);
+        x.setAxisMaxValue(carbonData.size());//add values for unique increasing data
         x.setTextColor(Color.WHITE);
+        x.setTypeface(gothic);
         x.setAvoidFirstLastClipping(true);
         y.setDrawGridLines(false);
+        y.setAxisMinValue(0);
         y.setTextColor(Color.WHITE);
+        y.setTypeface(gothic);
 
         CarbonChart.getAxisRight().setEnabled(false);
         CarbonChart.invalidate();
+        refresh.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                updateList();
+            }
+        });
     }
 
     private void updateList() {
+        CarbonChart.animateY(1000, Easing.EasingOption.EaseInOutCirc);
+        //CarbonChart.animateXY(3000, 3000, Easing.EasingOption.EaseInCirc, Easing.EasingOption.Linear);
         carbonData = FileHelper.ReadCarbon(getContext());
         driveTimeData = FileHelper.ReadDriveTime(getContext());
         timeData = FileHelper.ReadTime(getContext());
         distanceData = FileHelper.ReadDistance(getContext());
         List<Entry> entries = new ArrayList<Entry>();
         for(int i = 0;i<carbonData.size();i++){
-            entries.add(new Entry(i,carbonData.get(i)));
+            entries.add(new Entry(i+1,carbonData.get(i)));
         }
-        dataSet = new LineDataSet(entries,"Carbon Credit");
+        dataSet = new LineDataSet(entries,"");
+        dataSet.setValueTextColor(Color.WHITE);
+        dataSet.setValueTypeface(gothic);
         lineData = new LineData(dataSet);
         CarbonChart.setData(lineData);
+        CarbonChart.notifyDataSetChanged();
+        CarbonChart.invalidate();
         this.log.clear();
+        System.out.println("Arraylist size: " +carbonData.size());
         for(int i = 0; i<carbonData.size();i++){
             Log data = new Log();
             data.setCredit("Carbon Credit: " + carbonData.get(i));

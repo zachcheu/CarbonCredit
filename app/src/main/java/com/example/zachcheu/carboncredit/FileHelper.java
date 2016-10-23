@@ -37,11 +37,13 @@ public class FileHelper {
                     if(end == 0){
                         start = 0;
                     }else{
-                        start = line.indexOf(' ',end);
+                        start = end+1;
                     }
-                    end = line.indexOf(' ',start);
+                    end = line.indexOf(' ',start+1);
                 }
                 list.add(Integer.parseInt(line.substring(start,end)));
+                start = 0;
+                end = 0;
             }
             fileInputStream.close();
             line = stringBuilder.toString();
@@ -56,9 +58,9 @@ public class FileHelper {
         }
         return list;
     }
-    public static ArrayList<Integer> ReadDriveTime(Context context){
+    public static ArrayList<Float> ReadDriveTime(Context context){
         String line = null;
-        ArrayList<Integer> list = new ArrayList<Integer>();
+        ArrayList<Float> list = new ArrayList<Float>();
         int start = 0;
         int end = 0;
         int spaceIndex = 2;
@@ -79,8 +81,9 @@ public class FileHelper {
                     }
                     end = line.indexOf(' ',start+1);
                 }
-                System.out.println(start + " " + end);
-                list.add(Integer.parseInt(line.substring(start,end)));
+                list.add(Float.valueOf(line.substring(start,end)));
+                start = 0;
+                end = 0;
             }
             fileInputStream.close();
             line = stringBuilder.toString();
@@ -95,9 +98,9 @@ public class FileHelper {
         }
         return list;
     }
-    public static ArrayList<Integer> ReadDistance(Context context){
+    public static ArrayList<Float> ReadDistance(Context context){
         String line = null;
-        ArrayList<Integer> list = new ArrayList<Integer>();
+        ArrayList<Float> list = new ArrayList<Float>();
         int start = 0;
         int end = 0;
         int spaceIndex = 3;
@@ -118,7 +121,9 @@ public class FileHelper {
                     }
                     end = line.indexOf(' ',start+1);
                 }
-                list.add(Integer.parseInt(line.substring(start,end)));
+                list.add(Float.valueOf(line.substring(start,end)));
+                start = 0;
+                end = 0;
             }
             fileInputStream.close();
             line = stringBuilder.toString();
@@ -133,9 +138,9 @@ public class FileHelper {
         }
         return list;
     }
-    public static ArrayList<Integer> ReadTime(Context context){
+    public static ArrayList<Float> ReadTime(Context context){
         String line = null;
-        ArrayList<Integer> list = new ArrayList<Integer>();
+        ArrayList<Float> list = new ArrayList<Float>();
         int start = 0;
         int end = 0;
         int spaceIndex = 4;
@@ -156,7 +161,9 @@ public class FileHelper {
                     }
                     end = line.indexOf(' ',start+1);
                 }
-                list.add(Integer.parseInt(line.substring(start,end)));
+                list.add(Float.valueOf(line.substring(start,end)));
+                start = 0;
+                end = 0;
             }
             fileInputStream.close();
             line = stringBuilder.toString();

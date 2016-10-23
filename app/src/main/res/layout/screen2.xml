@@ -1,23 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ecf0f1"
-    android:elevation="0dp">
+    android:background="@color/graph_background"
+    android:elevation="0dp"
+    android:id="@+id/screen2">
 
     <com.github.mikephil.charting.charts.LineChart
+        android:layout_marginLeft="20dp"
         android:id="@+id/carbonchart"
         android:layout_height="0dp"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:paddingEnd="@dimen/graphPad">
     </com.github.mikephil.charting.charts.LineChart>
-
     <ListView
         android:id="@+id/list"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_below="@id/carbonchart"
+        android:layout_alignParentBottom="true"
         android:divider="@color/list_divider"
-        android:dividerHeight="1dp"
-        android:listSelector="@drawable/list_row_selector" />
-
+        android:dividerHeight="2px"
+        android:listSelector="@drawable/list_row_selector"
+        android:drawSelectorOnTop="true"/>
+    <TextView
+        android:id="@+id/ystring"
+        android:rotation="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fixing Y-axis"
+        android:background="@color/log_color"
+        android:layout_gravity="center"
+        android:layout_alignParentStart="true"/>
+    <TextView
+        android:id="@+id/xstring"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Drive Number"
+        android:background="@color/graph_background"
+        android:layout_below="@id/carbonchart"
+        android:layout_centerHorizontal="true"/>
+    <TextView
+        android:id="@+id/stringLog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="  Driving Log"
+        android:background="@color/log_color"
+        android:layout_above="@id/list"/>
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/floating_refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/carbonchart"
+        android:src="@mipmap/restart"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        fab:fab_colorNormal="@color/refresh_button_color"/>
 </RelativeLayout>

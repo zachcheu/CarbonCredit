@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/list_row_selector"
+    android:background="@color/log_color"
     android:padding="8dp" >
 
     <!-- Thumbnail Image -->
@@ -20,6 +20,7 @@
         android:layout_alignTop="@+id/thumbnail"
         android:layout_toRightOf="@+id/thumbnail"
         android:textSize="@dimen/credit"
+        android:textColor="@color/log_title_color"
         android:textStyle="bold" />
 
     <TextView
@@ -29,6 +30,7 @@
         android:layout_below="@id/credit"
         android:layout_marginTop="1dip"
         android:layout_toRightOf="@+id/thumbnail"
+        android:textColor="@color/log_info_color"
         android:textSize="@dimen/time" />
 
     <TextView
@@ -38,7 +40,7 @@
         android:layout_below="@id/time"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/thumbnail"
-        android:textColor="@color/Distance"
+        android:textColor="@color/log_info_color"
         android:textSize="@dimen/distance" />
 
     <TextView
@@ -47,7 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:textColor="@color/Date"
+        android:textColor="@color/log_info_color"
         android:textSize="@dimen/date" />
 
 </RelativeLayout>

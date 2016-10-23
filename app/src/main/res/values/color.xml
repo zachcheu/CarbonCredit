@@ -2,9 +2,15 @@
 <resources>
     <color name="Distance">#666666</color>
     <color name="Date">#888888</color>
-    <color name="list_divider">#d9d9d9</color>
-    <color name="list_row_start_color">#ffffff</color>
-    <color name="list_row_end_color">#ffffff</color>
-    <color name="list_row_hover_start_color">#ebeef0</color>
-    <color name="list_row_hover_end_color">#ebeef0</color>
+    <color name="list_divider">#6f7179</color>
+    <color name="list_row_start_color">#CC5d5f6b</color>
+    <color name="list_row_end_color">#CC5d5f6b</color>
+    <color name="list_row_hover_start_color">#555d5f6b</color>
+    <color name="list_row_hover_end_color">#CC5d5f6b</color>
+    <color name="graph_background">#5d5f6b</color>
+    <color name="log_color">#4b4e58</color>
+    <color name="log_title_color">#c4c5c7</color>
+    <color name="log_info_color">#ffffff</color>
+    <color name="log_header_color">#707279</color>
+    <color name="refresh_button_color">#66b568</color>
 </resources>

@@ -18,6 +18,10 @@ public class PointsToCred {
             CreditLimit = CreditCarLimit();
             CreditAccel = CreditCarAccel();
             CarbonCred = 50 + CreditEffi + CreditIdle + CreditLimit + CreditAccel;
+            System.out.println("Effi"+CreditEffi);
+            System.out.println("Idle"+CreditIdle);
+            System.out.println("Limit"+CreditLimit);
+            System.out.println("Accel"+CreditAccel);
         }
     }
     public static int CreditCarEffi(){
@@ -101,8 +105,5 @@ public class PointsToCred {
             small = "fuel efficency by avoiding idle time";
         }
         return small;
-    }
-    public int returnCreditEffi(){
-        return CarbonCred;
     }
 }

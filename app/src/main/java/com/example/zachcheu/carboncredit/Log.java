@@ -1,14 +1,14 @@
 package com.example.zachcheu.carboncredit;
 public class Log {
     private String credit;
-    private int date;
+    private float date;
     private double time;
-    private int dist;
+    private float dist;
 
     public Log() {
     }
 
-    public Log(String name, int date, double time, int dist) {
+    public Log(String name, float date, double time, float dist) {
         this.credit = name;
         this.date = date;
         this.time = time;
@@ -23,11 +23,11 @@ public class Log {
         this.credit = name;
     }
 
-    public int getDate() {
+    public float getDate() {
         return date;
     }
 
-    public void setDate(int date) {
+    public void setDate(float date) {
         this.date = date;
     }
 
@@ -39,11 +39,11 @@ public class Log {
         this.time = time;
     }
 
-    public int getDist() {
+    public float getDist() {
         return dist;
     }
 
-    public void setDist(int dist) {
+    public void setDist(float dist) {
         this.dist = dist;
     }
 
