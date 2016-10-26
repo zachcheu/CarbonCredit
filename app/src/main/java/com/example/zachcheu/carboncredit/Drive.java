@@ -156,7 +156,7 @@ public class Drive extends Activity implements LocationListener {
         //@ param 1 : time -> we still need to calculate it properly...default is 0 for now
         //@ last param: isHighway...still need google maps api for this to work
         drivePointManager.addPoint(new DrivePoint(
-                0.0f,
+                (float)System.nanoTime(),
                 (int) (location.getSpeed() * 2.2369),
                 location,
                 false));

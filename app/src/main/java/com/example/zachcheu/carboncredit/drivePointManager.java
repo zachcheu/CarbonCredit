@@ -40,18 +40,25 @@ public class DrivePointManager {
     }
     public float getDriveTime(){
         //fix when time is understood
+
+        System.out.print("Drive Time: "+points.get(points.size()-1).getTime());
         return points.get(points.size()-1).getTime();
     }
     public int getAverageSpeed(){
         int total = 0;
         for(int i = 0; i<points.size();i++){
             total += points.get(i).getSpeed();
+
         }
         return total/points.size();
     }
     public float getDistance(){
         //fix when time is understood
+        System.out.println("Distance: "+getAverageSpeed()*getDriveTime());
         return getAverageSpeed()*getDriveTime();
     }
-    public float sinceDrive(){ return points.get(1).getTime();}
+    public float sinceDrive(){
+        System.out.println("Since Drive: "+points.get(1).getTime());
+        return points.get(1).getTime();
+    }
 }
