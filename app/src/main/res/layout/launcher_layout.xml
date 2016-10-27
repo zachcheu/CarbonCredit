@@ -5,10 +5,10 @@
     android:background="#454a5e"
     android:layout_weight="8">
 
-    <View
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="#1abc9c"
         android:layout_weight="7"/>
 
     <com.aurelhubert.ahbottomnavigation.AHBottomNavigation
