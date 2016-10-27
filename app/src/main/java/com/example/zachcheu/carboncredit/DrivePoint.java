@@ -1,5 +1,4 @@
 package com.example.zachcheu.carboncredit;
-
 import android.location.Location;
 
 /**
@@ -24,7 +23,7 @@ public class DrivePoint {
 
     private Integer speed = null;
 
-    private float time;
+    private long time;
 
     public Location getmLocation() {
         return mLocation;
@@ -42,11 +41,11 @@ public class DrivePoint {
         this.speed = speed;
     }
 
-    public float getTime() {
+    public long getTime() {
         return time;
     }
 
-    public void setTime(float time) {
+    public void setTime(long time) {
         this.time = time;
     }
 
@@ -54,7 +53,7 @@ public class DrivePoint {
 
     }
 
-    public DrivePoint(float time, Integer speed, Location mLocation, boolean isHighway) {
+    public DrivePoint(long time, Integer speed, Location mLocation, boolean isHighway) {
         this.time = time;
         this.speed = speed;
         this.mLocation = mLocation;

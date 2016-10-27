@@ -1,5 +1,6 @@
 package com.example.zachcheu.carboncredit;
 
+
 import java.util.ArrayList;
 
 public class PointsToCred {
@@ -15,13 +16,13 @@ public class PointsToCred {
         if(list.size()>2) {
             CreditEffi = CreditCarEffi();
             CreditIdle = (int) CreditCarIdle();
+            if(CreditIdle<0){
+                CreditIdle = 100;
+            }
             CreditLimit = CreditCarLimit();
             CreditAccel = CreditCarAccel();
             CarbonCred = 50 + CreditEffi + CreditIdle + CreditLimit + CreditAccel;
-            System.out.println("Effi"+CreditEffi);
-            System.out.println("Idle"+CreditIdle);
-            System.out.println("Limit"+CreditLimit);
-            System.out.println("Accel"+CreditAccel);
+            System.out.println("Idle: "+CreditIdle + "Effi: "+CreditEffi + "Limit: "+CreditLimit + "Accel: "+CreditAccel);
         }
     }
     public static int CreditCarEffi(){
@@ -33,17 +34,17 @@ public class PointsToCred {
         float timeTot = 0;
         for(int i = 0; i< list.size();i++){
             if(list.get(i).getSpeed().equals(0)){
-                time1 = list.get(i).getTime();
+                time1 = Math.round(list.get(i).getTime());
                 for(int j = i+1; j<list.size();j++) {
                     if (!list.get(j).getSpeed().equals(0)) {
-                        time2 = list.get(j).getTime();
+                        time2 = Math.round(list.get(j).getTime());
                         j = list.size();
                     }
                 }
             }
             timeTot +=time2-time1;
         }
-        return (Var.idleBase-(list.get(list.size()-1).getTime()-timeTot))*10;
+        return (Var.idleBase-Math.round(list.get(list.size()-1).getTime()-timeTot))*10;
     }
     public static int CreditCarLimit(){
         int up = 0;
