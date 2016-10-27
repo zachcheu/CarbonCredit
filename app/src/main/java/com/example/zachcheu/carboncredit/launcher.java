@@ -12,6 +12,7 @@ public class launcher extends AppCompatActivity{
     @Override
     public void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
-        setContentView();
+        setContentView(R.layout.launcher_layout);
+
     }
 }
