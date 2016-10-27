@@ -2,6 +2,7 @@ package com.example.zachcheu.carboncredit;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
@@ -39,6 +40,19 @@ public class launcher extends AppCompatActivity{
      */
     public AHBottomNavigation bottomNavigation;
 
+    /*
+     * list that holds all fragments
+     */
+    public ArrayList<Fragment> fragmentArrayList;
+
+    /*
+     * fragments
+     */
+    public MapFragment mapFragment;
+    public LogsFragment logsFragment;
+    public PointsFragment pointsFragment;
+    public SettingsFragment settingsFragment;
+
 
     @Override
     public void onCreate(Bundle savedInstance){
@@ -49,7 +63,18 @@ public class launcher extends AppCompatActivity{
         adapter = new CollectionPagerAdapter(getSupportFragmentManager());
         bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
         _itemlist = new ArrayList<AHBottomNavigationItem>();
+        fragmentArrayList = new ArrayList<Fragment>();
+        mapFragment = new MapFragment();
         viewPager = (ViewPager) findViewById(R.id.viewPager);
+
+        // Add fragments to list
+        fragmentArrayList.add(mapFragment);
+
+        // transfer list to adapter
+        adapter.addFragmentArray(fragmentArrayList);
+
+        viewPager.setAdapter(adapter);
+        viewPager.setCurrentItem(1);
 
         // Add images & text to a list
         _itemlist.add(new AHBottomNavigationItem("Logs", R.drawable.wood));
@@ -62,6 +87,13 @@ public class launcher extends AppCompatActivity{
 
         // configures colors & behaviors of the navbar
         ConfigNavBarSettings();
+
+        bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
+            @Override
+            public boolean onTabSelected(int position, boolean wasSelected) {
+                return true;
+            }
+        });
 
     }
 
