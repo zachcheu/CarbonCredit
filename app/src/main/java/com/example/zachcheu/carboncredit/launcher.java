@@ -5,9 +5,12 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
+import android.view.View;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
+import com.mapbox.mapboxsdk.MapboxAccountManager;
 
 import java.util.ArrayList;
 
@@ -22,11 +25,10 @@ public class launcher extends AppCompatActivity{
      */
     public CollectionPagerAdapter adapter;
 
-
     /*
-     * Default viewpager... nothing special
+     * Custom viewpager to disable scrolling
      */
-    public ViewPager viewPager;
+    public CustomViewPager customViewPager;
 
 
     /*
@@ -57,6 +59,7 @@ public class launcher extends AppCompatActivity{
     @Override
     public void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
+        MapboxAccountManager.start(this, getString(R.string.access_token));
         setContentView(R.layout.launcher_layout);
 
         // finish initialization of variables
@@ -65,16 +68,25 @@ public class launcher extends AppCompatActivity{
         _itemlist = new ArrayList<AHBottomNavigationItem>();
         fragmentArrayList = new ArrayList<Fragment>();
         mapFragment = new MapFragment();
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        logsFragment = new LogsFragment();
+        pointsFragment = new PointsFragment();
+        settingsFragment = new SettingsFragment();
+
+        customViewPager = (CustomViewPager) findViewById(R.id.viewPager);
+        mapFragment.setContext(this);
 
         // Add fragments to list
+        fragmentArrayList.add(logsFragment);
         fragmentArrayList.add(mapFragment);
+        fragmentArrayList.add(pointsFragment);
+        fragmentArrayList.add(settingsFragment);
 
         // transfer list to adapter
         adapter.addFragmentArray(fragmentArrayList);
 
-        viewPager.setAdapter(adapter);
-        viewPager.setCurrentItem(1);
+        customViewPager.setAdapter(adapter);
+        customViewPager.setCurrentItem(0, false);
+        customViewPager.setOffscreenPageLimit(3);
 
         // Add images & text to a list
         _itemlist.add(new AHBottomNavigationItem("Logs", R.drawable.wood));
@@ -91,6 +103,7 @@ public class launcher extends AppCompatActivity{
         bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
             @Override
             public boolean onTabSelected(int position, boolean wasSelected) {
+                customViewPager.setCurrentItem(position, false);
                 return true;
             }
         });
@@ -105,6 +118,6 @@ public class launcher extends AppCompatActivity{
         this.bottomNavigation.setForceTint(false);
         this.bottomNavigation.setForceTitlesDisplay(true);
         this.bottomNavigation.setColored(false);
-        this.bottomNavigation.setCurrentItem(1);
+        this.bottomNavigation.setCurrentItem(0);
     }
 }
