@@ -67,7 +67,7 @@ public class SecondScreenFragment extends Fragment{
         stringLog = (TextView) getActivity().findViewById(R.id.stringLog);
         ylabel = (TextView) getActivity().findViewById(R.id.ystring);
         xlabel = (TextView) getActivity().findViewById(R.id.xstring);
-        gothic = Typeface.createFromAsset(getActivity().getAssets(),"gothic.ttf");
+        gothic = Typeface.createFromAsset(getActivity().getAssets(), "fonts/gothic.ttf");
         xlabel.setTypeface(gothic);
         ylabel.setTypeface(gothic);
         ylabel.setGravity(Gravity.CENTER);

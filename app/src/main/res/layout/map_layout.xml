@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#454a5e">
+    android:layout_height="match_parent">
 
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapview"
@@ -13,4 +13,25 @@
         mapbox:zoom="7"
         mapbox:logo_enabled="false"
         mapbox:compass_enabled="false"/>
-</LinearLayout>
+    
+    <View
+        android:id="@+id/v"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:background="#FFFFFF"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/v"
+        android:text="Speed: "
+        tools:text="Speed:"
+        android:id="@+id/speedText"
+        android:layout_marginBottom="45dp"
+        android:layout_marginLeft="4dp"
+        android:textColor="#000000"
+        android:textSize="15dp" />
+
+</RelativeLayout>

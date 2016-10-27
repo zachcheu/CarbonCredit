@@ -8,9 +8,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.SystemClock;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.mapbox.mapboxsdk.MapboxAccountManager;
@@ -23,12 +21,7 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Drive extends Activity implements LocationListener {
 
@@ -50,7 +43,7 @@ public class Drive extends Activity implements LocationListener {
         drivePointManager = new DrivePointManager();
         textView = (TextView) findViewById(R.id.speedView);
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Typeface typeface = Typeface.createFromAsset(getAssets(), "gothic.ttf");
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/gothic.ttf");
         textView.setTypeface(typeface);
 
         mapView = (MapView) findViewById(R.id.mapview);

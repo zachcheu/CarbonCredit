@@ -2,6 +2,7 @@ package com.example.zachcheu.carboncredit;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -11,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.mapbox.mapboxsdk.MapboxAccountManager;
 import com.mapbox.mapboxsdk.annotations.PolylineOptions;
@@ -34,6 +36,8 @@ public class MapFragment extends Fragment implements LocationListener {
     public DrivePointManager drivePointManager;
     public Context mContext;
 
+    public TextView textView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         MapboxAccountManager.getInstance();
@@ -43,6 +47,11 @@ public class MapFragment extends Fragment implements LocationListener {
 
         drivePointManager = new DrivePointManager();
         lm = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
+        textView = (TextView) rootView.findViewById(R.id.speedText);
+        Typeface typeface = Typeface.createFromAsset(mContext.getAssets(), "fonts/gothic.ttf");
+        textView.setTypeface(typeface);
+        System.out.println("test");
+
 
         mapView = (MapView) rootView.findViewById(R.id.mapview);
         mapView.onCreate(savedInstanceState);
@@ -116,17 +125,29 @@ public class MapFragment extends Fragment implements LocationListener {
     }
 
     @Override
-    public void onLocationChanged(Location location) {
+    public void onLocationChanged(final Location location) {
 
         //@ param 1 : time -> we still need to calculate it properly...default is 0 for now
         //@ last param: isHighway...still need google maps api for this to work
+        final Location temp = location;
         drivePointManager.addPoint(new DrivePoint(
-                0.0f,
+                0,
                 (int) (location.getSpeed() * 2.2369),
                 location,
                 false));
 
         addLine();
+
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                if(location.hasSpeed())
+                    textView.setText("Speed: " + String.valueOf((int) (temp.getSpeed() * 2.2369)) + " (mph)");
+                else
+                    textView.setText("Speed: 0 (mph)");
+            }
+        });
     }
 
     @Override
