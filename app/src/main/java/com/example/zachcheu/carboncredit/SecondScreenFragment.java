@@ -43,9 +43,9 @@ public class SecondScreenFragment extends Fragment{
     private FileReader r;
     private BufferedReader b;
     private ArrayList<Integer> carbonData = new ArrayList<Integer>();
-    private ArrayList<Float> distanceData = new ArrayList<Float>();
-    private ArrayList<Float> driveTimeData = new ArrayList<Float>();
-    private ArrayList<Float> timeData = new ArrayList<Float>();
+    private ArrayList<Long> distanceData = new ArrayList<Long>();
+    private ArrayList<Long> driveTimeData = new ArrayList<Long>();
+    private ArrayList<Long> timeData = new ArrayList<Long>();
     FloatingActionButton refresh;
     TextView stringLog, xlabel, ylabel;
     Typeface gothic;
@@ -112,7 +112,7 @@ public class SecondScreenFragment extends Fragment{
         YAxis y = CarbonChart.getAxisLeft();
         x.setPosition(XAxis.XAxisPosition.BOTTOM);
         x.setDrawGridLines(false);
-        x.setAxisMinValue(1);
+        x.setAxisMinValue(2);
         x.setLabelCount(carbonData.size()-1);
         x.setAxisMaxValue(carbonData.size());//add values for unique increasing data
         x.setTextColor(Color.WHITE);
@@ -156,10 +156,10 @@ public class SecondScreenFragment extends Fragment{
         for(int i = 0; i<carbonData.size();i++){
             Log data = new Log();
             data.setCredit("Carbon Credit: " + carbonData.get(i));
-            data.setTime(driveTimeData.get(i));
-            data.setDate(timeData.get(i));
+            data.setTime(((driveTimeData.get(i))/1000)/60);
+            data.setDate(timeUnit(((System.currentTimeMillis()-timeData.get(i))/1000)));
             data.setDist(distanceData.get(i));
-            this.log.add(data);
+            this.log.add(0,data);
         }
         adapter.notifyDataSetChanged();
     }
@@ -168,5 +168,14 @@ public class SecondScreenFragment extends Fragment{
     public void onResume() {
         updateList();
         super.onResume();
+    }
+    public String timeUnit(long min){
+        if(min>60){
+            return min/60+" minutes ago";
+        }else if(min>3600){
+            return min/3600+" hours ago";
+        }else{
+            return min+" seconds ago";
+        }
     }
 }

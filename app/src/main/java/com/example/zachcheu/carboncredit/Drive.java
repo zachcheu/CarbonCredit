@@ -85,18 +85,10 @@ public class Drive extends Activity implements LocationListener {
     //drawing points test
     private void addPoints(final MapboxMap mapboxMap) {
 
-
-        final List<LatLng> c = new ArrayList<>();
-        c.add(new LatLng((double) (47.673988), (double) (-122.121513)));
-        c.add(new LatLng((double) (40.730610), (double) (-73.935242)));
-        c.add(new LatLng((double) (47.673988), (double) (-122.121513)));
-
-
         Drive.this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 mapboxMap.addPolyline(new PolylineOptions()
-                        .addAll(c)
                         .width(10)
                         .color(Color.parseColor("#3498db")));
             }
@@ -156,7 +148,7 @@ public class Drive extends Activity implements LocationListener {
         //@ param 1 : time -> we still need to calculate it properly...default is 0 for now
         //@ last param: isHighway...still need google maps api for this to work
         drivePointManager.addPoint(new DrivePoint(
-                (float)System.nanoTime(),
+                System.currentTimeMillis(),
                 (int) (location.getSpeed() * 2.2369),
                 location,
                 false));

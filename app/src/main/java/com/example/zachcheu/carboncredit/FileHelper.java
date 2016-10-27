@@ -1,5 +1,4 @@
 package com.example.zachcheu.carboncredit;
-
 import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
@@ -58,9 +57,9 @@ public class FileHelper {
         }
         return list;
     }
-    public static ArrayList<Float> ReadDriveTime(Context context){
+    public static ArrayList<Long> ReadDriveTime(Context context){
         String line = null;
-        ArrayList<Float> list = new ArrayList<Float>();
+        ArrayList<Long> list = new ArrayList<Long>();
         int start = 0;
         int end = 0;
         int spaceIndex = 2;
@@ -81,7 +80,7 @@ public class FileHelper {
                     }
                     end = line.indexOf(' ',start+1);
                 }
-                list.add(Float.valueOf(line.substring(start,end)));
+                list.add(Long.valueOf(line.substring(start,end)));
                 start = 0;
                 end = 0;
             }
@@ -98,9 +97,9 @@ public class FileHelper {
         }
         return list;
     }
-    public static ArrayList<Float> ReadDistance(Context context){
+    public static ArrayList<Long> ReadDistance(Context context){
         String line = null;
-        ArrayList<Float> list = new ArrayList<Float>();
+        ArrayList<Long> list = new ArrayList<Long>();
         int start = 0;
         int end = 0;
         int spaceIndex = 3;
@@ -121,7 +120,7 @@ public class FileHelper {
                     }
                     end = line.indexOf(' ',start+1);
                 }
-                list.add(Float.valueOf(line.substring(start,end)));
+                list.add(Long.valueOf(line.substring(start,end)));
                 start = 0;
                 end = 0;
             }
@@ -138,9 +137,9 @@ public class FileHelper {
         }
         return list;
     }
-    public static ArrayList<Float> ReadTime(Context context){
+    public static ArrayList<Long> ReadTime(Context context){
         String line = null;
-        ArrayList<Float> list = new ArrayList<Float>();
+        ArrayList<Long> list = new ArrayList<Long>();
         int start = 0;
         int end = 0;
         int spaceIndex = 4;
@@ -161,7 +160,7 @@ public class FileHelper {
                     }
                     end = line.indexOf(' ',start+1);
                 }
-                list.add(Float.valueOf(line.substring(start,end)));
+                list.add(Long.valueOf(line.substring(start,end)));
                 start = 0;
                 end = 0;
             }

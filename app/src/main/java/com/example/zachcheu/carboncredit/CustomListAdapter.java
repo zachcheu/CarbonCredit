@@ -60,7 +60,7 @@ public class CustomListAdapter extends BaseAdapter {
         credit.setText(m.getCredit());
 
         // time
-        time.setText("time: " + String.valueOf(m.getTime()));
+        time.setText("Drive Time: " + String.valueOf(m.getTime()));
 
         // dist
         dist.setText("Distance: "+m.getDist());
