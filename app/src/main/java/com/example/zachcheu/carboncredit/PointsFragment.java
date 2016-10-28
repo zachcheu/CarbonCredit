@@ -40,7 +40,7 @@ public class PointsFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         SharedPreferences setting = getActivity().getSharedPreferences("PrefFile", 0);
-        totalXp = setting.getInt("xp",0);
+        totalXp = setting.getInt("xp",0)+Var.startXp;
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -51,6 +51,10 @@ public class PointsFragment extends Fragment {
         textNextLevel = (TextView)getActivity().findViewById(R.id.textNextLevel);
         pointsNextLevel = (TextView)getActivity().findViewById(R.id.pointsNextLevel);
         xpBar = (ProgressBar)getActivity().findViewById(R.id.progressBar);
+        xpBar.setScaleY(2f);
+        profilePic.setBackgroundResource(R.mipmap.rocket);
+        profilePic.setScaleX(0.8f);
+        profilePic.setScaleY(0.8f);
         gothic = Typeface.createFromAsset(getActivity().getAssets(),"fonts/gothic.ttf");
         arcade = Typeface.createFromAsset(getActivity().getAssets(),"fonts/arcade.ttf");
         infoLevel.setTypeface(gothic);
@@ -63,12 +67,16 @@ public class PointsFragment extends Fragment {
         update();
     }
     public void update(){
-        xpBar.setProgress(25);
-        //xpBar.setProgress(getSetProgressValue(totalXp));
+        //xpBar.setProgress(25);
+        System.out.println(getSetProgressValue(totalXp));
+        System.out.println(getSetMaxValue(totalXp));
+        System.out.println("Progress: "+(int)(100*((double)getSetProgressValue(totalXp)/(double)getSetMaxValue(totalXp))));
+        xpBar.setProgress((int)(100*((double)getSetProgressValue(totalXp)/(double)getSetMaxValue(totalXp))));
         //xpBar.setMax(getSetMaxValue(totalXp));
         level.setText(getRank(totalXp));
         points.setText(totalXp+" pts");
         pointsNextLevel.setText(getSetMaxValue(totalXp)-getSetProgressValue(totalXp) +" pts");
+        xpBar.invalidate();
     }
     public int getSetProgressValue(int totalXp){
         for(int i =0 ; i<Var.xpLvl.length; i++){

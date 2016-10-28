@@ -78,5 +78,14 @@
         android:visibility="visible"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:background="@color/Date"/>
+        android:max="100"
+        android:layout_marginTop="10dp"/>
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/progressBar"
+        android:background="@color/list_divider"/>
 </RelativeLayout>
