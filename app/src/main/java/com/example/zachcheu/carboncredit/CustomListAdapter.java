@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.android.volley.toolbox.NetworkImageView;
-
 import java.util.List;
 
 public class CustomListAdapter extends BaseAdapter {
@@ -46,8 +44,6 @@ public class CustomListAdapter extends BaseAdapter {
         if (convertView == null)
             convertView = inflater.inflate(R.layout.list_row, null);
 
-        NetworkImageView thumbNail = (NetworkImageView) convertView
-                .findViewById(R.id.thumbnail);
         TextView credit = (TextView) convertView.findViewById(R.id.credit);
         TextView time = (TextView) convertView.findViewById(R.id.time);
         TextView dist = (TextView) convertView.findViewById(R.id.distance);

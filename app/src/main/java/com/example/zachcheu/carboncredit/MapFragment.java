@@ -35,6 +35,7 @@ public class MapFragment extends Fragment implements LocationListener {
     public LocationManager lm;
     public DrivePointManager drivePointManager;
     public Context mContext;
+    Typeface typeface;
 
     public TextView textView;
 
@@ -48,7 +49,7 @@ public class MapFragment extends Fragment implements LocationListener {
         drivePointManager = new DrivePointManager();
         lm = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
         textView = (TextView) rootView.findViewById(R.id.speedText);
-        Typeface typeface = Typeface.createFromAsset(mContext.getAssets(), "fonts/gothic.ttf");
+        typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/gothic.ttf");
         textView.setTypeface(typeface);
         System.out.println("test");
 
