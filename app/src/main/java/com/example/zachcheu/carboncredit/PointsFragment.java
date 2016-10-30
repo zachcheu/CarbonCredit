@@ -10,9 +10,12 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 /**
  * Created by DevWork on 10/27/16.
@@ -21,10 +24,15 @@ import android.widget.TextView;
 public class PointsFragment extends Fragment {
     public static final String ARG_OBJECT = "object";
     private ImageView profilePic;
-    private TextView infoLevel, level, points, textNextLevel, pointsNextLevel;
+    private TextView infoLevel, level, points, textNextLevel, pointsNextLevel, drive, credit, distance,varDrive,varCredit,varDist;
     private Typeface gothic,arcade;
+    private ArrayList<Integer> carbonData;
+    int CarbonAverage,DriveCount;
     private ProgressBar xpBar;
+    private GridView iconGrid;
+    private IconCustomListAdapter icon;
     private int totalXp;
+    SharedPreferences setting;
 
 
     @Override
@@ -39,7 +47,8 @@ public class PointsFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        SharedPreferences setting = getActivity().getSharedPreferences("PrefFile", 0);
+        carbonData = FileHelper.ReadCarbon(getContext());
+        setting = getActivity().getSharedPreferences("PrefFile", 0);
         totalXp = setting.getInt("xp",0)+Var.startXp;
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -50,7 +59,19 @@ public class PointsFragment extends Fragment {
         points = (TextView)getActivity().findViewById(R.id.points);
         textNextLevel = (TextView)getActivity().findViewById(R.id.textNextLevel);
         pointsNextLevel = (TextView)getActivity().findViewById(R.id.pointsNextLevel);
+        drive = (TextView)getActivity().findViewById(R.id.Drive);
+        credit = (TextView)getActivity().findViewById(R.id.AverageCC);
+        distance = (TextView)getActivity().findViewById(R.id.distance);
+        varDrive = (TextView)getActivity().findViewById(R.id.varDrive);
+        varCredit = (TextView)getActivity().findViewById(R.id.varCC);
+        varDist = (TextView)getActivity().findViewById(R.id.varDist);
         xpBar = (ProgressBar)getActivity().findViewById(R.id.progressBar);
+        try{
+            varDrive.setText(""+getDriveCount());
+            varCredit.setText(""+getCarbonAverage());
+        }catch (Exception e){
+            System.out.println("Test12:"+e);
+        }
         xpBar.setScaleY(2f);
         profilePic.setBackgroundResource(R.mipmap.rocket);
         profilePic.setScaleX(0.8f);
@@ -62,10 +83,18 @@ public class PointsFragment extends Fragment {
         points.setTypeface(arcade);
         textNextLevel.setTypeface(gothic);
         pointsNextLevel.setTypeface(arcade);
+        drive.setTypeface(gothic);
+        credit.setTypeface(gothic);
+        distance.setTypeface(gothic);
+        varDist.setTypeface(arcade);
+        varDrive.setTypeface(arcade);
+        varCredit.setTypeface(arcade);
+
         profilePic.getLayoutParams().height=size.x/3;
         profilePic.getLayoutParams().width=size.x/3;
         update();
     }
+
     public void update(){
         //xpBar.setProgress(25);
         System.out.println(getSetProgressValue(totalXp));
@@ -77,6 +106,16 @@ public class PointsFragment extends Fragment {
         points.setText(totalXp+" pts");
         pointsNextLevel.setText(getSetMaxValue(totalXp)-getSetProgressValue(totalXp) +" pts");
         xpBar.invalidate();
+    }
+    public int getCarbonAverage(){
+        int total =0;
+        for(int i=0; i<carbonData.size();i++){
+            total += carbonData.get(i);
+        }
+        return total/carbonData.size();
+    }
+    public int getDriveCount(){
+        return carbonData.size();
     }
     public int getSetProgressValue(int totalXp){
         for(int i =0 ; i<Var.xpLvl.length; i++){

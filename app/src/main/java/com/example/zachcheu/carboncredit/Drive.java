@@ -30,6 +30,7 @@ public class Drive extends Activity implements LocationListener {
     private TextView textView;
     public MapView mapView;
     public DrivePointManager drivePointManager;
+    int liveCarbonCredit;
 
     public Drive() throws IOException {
     }
@@ -146,7 +147,6 @@ public class Drive extends Activity implements LocationListener {
                 (int) (location.getSpeed() * 2.2369),
                 location,
                 false));
-
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(MapboxMap mapboxMap) {

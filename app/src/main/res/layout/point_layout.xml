@@ -41,13 +41,75 @@
         android:layout_below="@id/level"
         android:layout_marginTop="17dp"
         android:id="@+id/points" />
+
+    <TextView
+        android:text="00"
+        android:textSize="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/profilePic"
+        android:layout_marginLeft="40dp"
+        android:id="@+id/varDrive" />
+    <TextView
+        android:text="00"
+        android:textSize="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/profilePic"
+        android:paddingRight="3dp"
+        android:id="@+id/varCC" />
+    <TextView
+        android:text="00"
+        android:textSize="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/profilePic"
+        android:layout_marginRight="40dp"
+        android:id="@+id/varDist" />
+
+
+    <TextView
+        android:text="DRIVE COUNT"
+        android:textSize="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/profilePic"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="30dp"
+        android:id="@+id/Drive" />
+    <TextView
+        android:text="AVERAGE CREDIT"
+        android:textSize="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/profilePic"
+        android:layout_marginTop="40dp"
+        android:paddingRight="3dp"
+        android:id="@+id/AverageCC" />
+    <TextView
+        android:text="MILES DRIVEN"
+        android:textSize="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/profilePic"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="30dp"
+        android:id="@+id/distance" />
+
     <View
         android:id="@+id/line1"
         android:layout_width="match_parent"
         android:layout_height="2px"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="65dp"
         android:layout_below="@id/profilePic"
         android:background="@color/list_divider"/>
+
     <TextView
         android:id="@+id/textNextLevel"
         android:text="Next level in "
@@ -88,4 +150,18 @@
         android:layout_marginTop="10dp"
         android:layout_below="@id/progressBar"
         android:background="@color/list_divider"/>
+
+    <GridView
+        android:id="@+id/grid_view"
+        android:layout_below="@id/line2"
+        android:layout_marginTop="10dp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:numColumns="auto_fit"
+        android:columnWidth="90dp"
+        android:horizontalSpacing="10dp"
+        android:verticalSpacing="10dp"
+        android:gravity="center"
+        android:stretchMode="columnWidth" >
+    </GridView>
 </RelativeLayout>
