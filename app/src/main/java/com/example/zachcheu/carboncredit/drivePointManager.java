@@ -38,11 +38,11 @@ public class DrivePointManager {
     public ArrayList<DrivePoint> getDriveList(){
         return points;
     }
-    public float getDriveTime(){
+    public long getDriveTime(){
         //fix when time is understood
 
         System.out.print("Drive Time: "+points.get(points.size()-1).getTime());
-        return points.get(points.size()-1).getTime();
+        return points.get(points.size()-1).getTime()-points.get(0).getTime();
     }
     public int getAverageSpeed(){
         int total = 0;
@@ -52,13 +52,13 @@ public class DrivePointManager {
         }
         return total/points.size();
     }
-    public float getDistance(){
+    public long getDistance(){
         //fix when time is understood
         System.out.println("Distance: "+getAverageSpeed()*getDriveTime());
         return getAverageSpeed()*getDriveTime();
     }
-    public float sinceDrive(){
+    public long sinceDrive(){
         System.out.println("Since Drive: "+points.get(1).getTime());
-        return points.get(1).getTime();
+        return points.get(points.size()-1).getTime();
     }
 }

@@ -1,7 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#2980b9">
+    android:layout_height="match_parent">
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/profilePic"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:background="@color/Date"/>
+    <TextView
+        android:text="Your current level"
+        android:textSize="14dp"
+        android:scaleType="fitStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/profilePic"
+        android:layout_marginTop="30dp"
+        android:id="@+id/infoLevel"
+        android:textStyle="bold"/>
+    <TextView
+        android:text="TextView"
+        android:textSize="25dp"
+        android:scaleType="fitStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/profilePic"
+        android:layout_below="@id/infoLevel"
+        android:layout_marginTop="13dp"
+        android:id="@+id/level" />
+    <TextView
+        android:text="TextView"
+        android:textSize="14dp"
+        android:scaleType="fitStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/profilePic"
+        android:layout_below="@id/level"
+        android:layout_marginTop="17dp"
+        android:id="@+id/points" />
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/profilePic"
+        android:background="@color/list_divider"/>
+    <TextView
+        android:id="@+id/textNextLevel"
+        android:text="Next level in "
+        android:textSize="14dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="17dp"
+        android:layout_marginTop="18dp"
+        android:layout_below="@+id/line1"
+        android:layout_alignParentLeft="true"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/pointsNextLevel"
+        android:textSize="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/line1"
+        android:layout_toRightOf="@id/textNextLevel"/>
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_below="@id/textNextLevel"
+        android:visibility="visible"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/Date"/>
+</RelativeLayout>
