@@ -12,26 +12,40 @@
         android:layout_height="match_parent"
         mapbox:zoom="7"
         mapbox:logo_enabled="false"
-        mapbox:compass_enabled="false"/>
+        mapbox:compass_enabled="false">
+
+    </com.mapbox.mapboxsdk.maps.MapView>
     
     <View
         android:id="@+id/v"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="65dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dp"
-        android:background="#FFFFFF"/>
+        android:background="#B3000000"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/v"
-        android:text="Speed: "
-        tools:text="Speed:"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        tools:text="SPEED"
         android:id="@+id/speedText"
-        android:layout_marginBottom="45dp"
-        android:layout_marginLeft="4dp"
-        android:textColor="#000000"
-        android:textSize="15dp" />
+        android:textColor="#d3d3d3"
+        android:layout_alignStart="@+id/texter"
+        android:text="SPEED"
+        android:textSize="9dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/texter"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="17dp"
+        tools:text="0 (mph)"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp" />
+
 
 </RelativeLayout>

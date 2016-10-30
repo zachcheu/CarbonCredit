@@ -1,4 +1,5 @@
 package com.example.zachcheu.carboncredit;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -23,8 +24,8 @@ public class CollectionPagerAdapter extends FragmentPagerAdapter {
     /*
      * Add a list of Fragments to the Array list
      */
-    public void addFragmentArray(ArrayList<Fragment> f){
-        for(Fragment frag : f)
+    public void addFragmentArray(ArrayList<Fragment> f) {
+        for (Fragment frag : f)
             this.fragmentArrayList.add(frag);
     }
 
@@ -37,17 +38,6 @@ public class CollectionPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         Fragment fragment;
         Bundle args = new Bundle();
-
-        /*
-        if(position != 1){
-            fragment = new FirstScreenFragment();
-            args.putInt(FirstScreenFragment.ARG_OBJECT, position);
-        }else{
-            fragment = new SecondScreenFragment();
-            args.putInt(SecondScreenFragment.ARG_OBJECT, position);
-        }
-        fragment.setArguments(args);
-        */
         fragment = fragmentArrayList.get(position);
         args.putInt("object", position);
         fragment.setArguments(args);
