@@ -24,6 +24,8 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
+import org.w3c.dom.Text;
+
 /**
  * Created by DevWork on 10/27/16.
  */
@@ -37,6 +39,7 @@ public class MapFragment extends Fragment implements LocationListener {
     public Context mContext;
 
     public TextView textView;
+    public TextView texter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,12 +49,17 @@ public class MapFragment extends Fragment implements LocationListener {
         int index = args.getInt(ARG_OBJECT);
 
         drivePointManager = new DrivePointManager();
-        lm = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
         textView = (TextView) rootView.findViewById(R.id.speedText);
-        Typeface typeface = Typeface.createFromAsset(mContext.getAssets(), "fonts/gothic.ttf");
-        textView.setTypeface(typeface);
-        System.out.println("test");
+        texter = (TextView) rootView.findViewById(R.id.texter);
+        lm = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
 
+        Typeface typeface = Typeface.createFromAsset(mContext.getAssets(), "fonts/Lato-Regular.ttf");
+        Typeface typeface1 = Typeface.createFromAsset(mContext.getAssets(), "fonts/Lato-Bold.ttf");
+        texter.setTypeface(typeface1);
+       // texter.setLetterSpacing(0.5f);
+        //textView.setLetterSpacing(0.5f);
+        System.out.println(texter.getLetterSpacing());
+        textView.setTypeface(typeface);
 
         mapView = (MapView) rootView.findViewById(R.id.mapview);
         mapView.onCreate(savedInstanceState);
@@ -142,10 +150,10 @@ public class MapFragment extends Fragment implements LocationListener {
             @Override
             public void run() {
 
-                if(location.hasSpeed())
-                    textView.setText("Speed: " + String.valueOf((int) (temp.getSpeed() * 2.2369)) + " (mph)");
+                if (location.hasSpeed())
+                    texter.setText(String.valueOf((int) (temp.getSpeed() * 2.2369)) + " mph");
                 else
-                    textView.setText("Speed: 0 (mph)");
+                    texter.setText("0 mph");
             }
         });
     }

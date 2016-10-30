@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_alignParentBottom="true"
-        android:background="#A6000000"/>
+        android:background="#B3000000"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -29,18 +29,23 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="40dp"
-        tools:text="TIME"
+        tools:text="SPEED"
         android:id="@+id/speedText"
-        android:textColor="#b2b3b3"
-        android:textSize="15dp" />
+        android:textColor="#d3d3d3"
+        android:layout_alignStart="@+id/texter"
+        android:text="SPEED"
+        android:textSize="9dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:id="@+id/texter"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_alignBottom="@+id/speedText"
-        tools:text="test" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="17dp"
+        tools:text="0 (mph)"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp" />
 
 
 </RelativeLayout>

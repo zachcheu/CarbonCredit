@@ -7,6 +7,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
@@ -60,6 +62,10 @@ public class launcher extends AppCompatActivity{
     public void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
         MapboxAccountManager.start(this, getString(R.string.access_token));
+        //setStatusBarTranslucent(true);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.launcher_layout);
 
         // finish initialization of variables
@@ -119,5 +125,13 @@ public class launcher extends AppCompatActivity{
         this.bottomNavigation.setForceTitlesDisplay(true);
         this.bottomNavigation.setColored(false);
         this.bottomNavigation.setCurrentItem(0);
+    }
+
+    protected void setStatusBarTranslucent(boolean makeTranslucent) {
+        if (makeTranslucent) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        } else {
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
     }
 }
