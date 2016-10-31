@@ -85,7 +85,7 @@ public class SecondScreenFragment extends Fragment{
         params = new RelativeLayout.LayoutParams(refresh.getButtonSize(),refresh.getButtonSize());
         params.bottomMargin = (int)list.getY()-(refresh.getButtonSize()/2);
         //rl.(refresh,params);
-        CarbonChart.getLayoutParams().height=size.y/3;
+        CarbonChart.getLayoutParams().height=size.y*5/12;
         list.getLayoutParams().height=size.y*11/20;
         adapter = new CustomListAdapter(getActivity(),log);
         list.setAdapter(adapter);

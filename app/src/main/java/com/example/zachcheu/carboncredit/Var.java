@@ -24,5 +24,6 @@ public class Var extends Activity {
     public static int startXp = 9250;
     public static int[] xpLvl = new int[] {0, 20, 100, 250, 500, 1000, 1500, 2500, 5000, 10000, 15000,25000};
     public static String[] xpName = new String[]{"Scooter","Segway","Moped","Public Bus","Nissan Leaf", "Toyota Prius","Tesla Model S","SpaceX Hyperloop","SpaceX Dragon","Dragonite used Fly","BatMobile","Golden Nimbus"};
+    public static Integer[] picId = {R.drawable.cloud, R.drawable.batman, R.drawable.rocketicon, R.drawable.pacman};
 }
 

@@ -142,7 +142,6 @@
         android:layout_centerHorizontal="true"
         android:max="100"
         android:layout_marginTop="10dp"/>
-
     <View
         android:id="@+id/line2"
         android:layout_width="match_parent"
@@ -150,18 +149,15 @@
         android:layout_marginTop="10dp"
         android:layout_below="@id/progressBar"
         android:background="@color/list_divider"/>
-
-    <GridView
-        android:id="@+id/grid_view"
-        android:layout_below="@id/line2"
-        android:layout_marginTop="10dp"
+    <ListView
+        android:id="@+id/playerList"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:numColumns="auto_fit"
-        android:columnWidth="90dp"
-        android:horizontalSpacing="10dp"
-        android:verticalSpacing="10dp"
-        android:gravity="center"
-        android:stretchMode="columnWidth" >
-    </GridView>
+        android:layout_height="0dp"
+        android:layout_below="@id/line2"
+        android:divider="@color/list_divider"
+        android:dividerHeight="2px"
+        android:listSelector="@drawable/list_row_selector"
+        android:drawSelectorOnTop="true"/>
+
+
 </RelativeLayout>

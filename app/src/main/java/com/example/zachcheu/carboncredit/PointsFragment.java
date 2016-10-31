@@ -10,12 +10,13 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by DevWork on 10/27/16.
@@ -24,14 +25,20 @@ import java.util.ArrayList;
 public class PointsFragment extends Fragment {
     public static final String ARG_OBJECT = "object";
     private ImageView profilePic;
-    private TextView infoLevel, level, points, textNextLevel, pointsNextLevel, drive, credit, distance,varDrive,varCredit,varDist;
+    private TextView strMiles, infoLevel, level, points, textNextLevel, pointsNextLevel, drive, credit, distance,varDrive,varCredit,varDist;
     private Typeface gothic,arcade;
     private ArrayList<Integer> carbonData;
+    private List<Player> log = new ArrayList<Player>();
+    private ArrayList<String> user = new ArrayList<String>();
+    private ArrayList<Long> time = new ArrayList<Long>();
+    private ArrayList<Long> dist = new ArrayList<Long>();
+    private CustomRankListAdapter adapter;
+
     int CarbonAverage,DriveCount;
     private ProgressBar xpBar;
-    private GridView iconGrid;
-    private IconCustomListAdapter icon;
+
     private int totalXp;
+    private ListView list;
     SharedPreferences setting;
 
 
@@ -65,13 +72,21 @@ public class PointsFragment extends Fragment {
         varDrive = (TextView)getActivity().findViewById(R.id.varDrive);
         varCredit = (TextView)getActivity().findViewById(R.id.varCC);
         varDist = (TextView)getActivity().findViewById(R.id.varDist);
+        strMiles = (TextView)getActivity().findViewById(R.id.strMiles);
         xpBar = (ProgressBar)getActivity().findViewById(R.id.progressBar);
+        list = (ListView)getActivity().findViewById(R.id.playerList);
+        list.getLayoutParams().height=size.y*48/100;
+
+
+        adapter = new CustomRankListAdapter(getActivity(),log);
+        list.setAdapter(adapter);
         try{
             varDrive.setText(""+getDriveCount());
             varCredit.setText(""+getCarbonAverage());
-        }catch (Exception e){
-            System.out.println("Test12:"+e);
+        }catch (Exception e) {
+            System.out.println("Test12:" + e);
         }
+
         xpBar.setScaleY(2f);
         profilePic.setBackgroundResource(R.mipmap.rocket);
         profilePic.setScaleX(0.8f);
@@ -96,6 +111,21 @@ public class PointsFragment extends Fragment {
     }
 
     public void update(){
+        user = PlayerFileHelper.ReadUser(getContext());
+        time = PlayerFileHelper.ReadTime(getContext());
+        dist = PlayerFileHelper.ReadDistance(getContext());
+
+        for(int i = 0; i<user.size();i++){
+            Player data = new Player();
+            data.setRank(i+1);
+            data.setUser(user.get(i));
+            data.setTime(time.get(i));
+            data.setDist(dist.get(i));
+            data.setPicId(i%3);
+            this.log.add(data);
+        }
+        adapter.notifyDataSetChanged();
+
         //xpBar.setProgress(25);
         System.out.println(getSetProgressValue(totalXp));
         System.out.println(getSetMaxValue(totalXp));

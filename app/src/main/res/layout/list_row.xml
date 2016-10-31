@@ -6,9 +6,9 @@
     android:padding="8dp" >
 
     <!-- Thumbnail Image -->
-    <com.android.volley.toolbox.NetworkImageView
+    <ImageView
         android:id="@+id/thumbnail"
-        android:layout_width="80dp"
+        android:layout_width="30dp"
         android:layout_height="80dp"
         android:layout_alignParentLeft="true"
         android:layout_marginRight="8dp" />
@@ -28,7 +28,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/credit"
-        android:layout_marginTop="1dip"
+        android:layout_marginTop="5dip"
         android:layout_toRightOf="@+id/thumbnail"
         android:textColor="@color/log_info_color"
         android:textSize="@dimen/time" />

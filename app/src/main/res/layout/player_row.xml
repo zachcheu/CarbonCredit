@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/log_color"
+    android:padding="8dp" >
+
+
+    <TextView
+        android:id="@+id/rank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:textSize="@dimen/credit"
+        android:textColor="@color/log_title_color"
+        android:textStyle="bold" />
+    <ImageView
+        android:id="@+id/pic"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_toRightOf="@id/rank"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:visibility="visible"/>
+    <TextView
+        android:id="@+id/user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dip"
+        android:layout_toRightOf="@id/pic"
+        android:layout_alignParentTop="true"
+        android:textColor="@color/log_info_color"
+        android:textSize="@dimen/time" />
+
+    <TextView
+        android:id="@+id/min"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/pic"
+        android:textColor="@color/log_info_color"
+        android:textSize="@dimen/date" />
+    <TextView
+        android:id="@+id/strMiles"
+        android:text="credit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:textColor="@color/log_info_color"
+        android:textSize="@dimen/date" />
+
+    <TextView
+        android:id="@+id/dist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/strMiles"
+        android:layout_centerVertical="true"
+        android:textColor="@color/log_info_color"
+        android:textSize="@dimen/distance" />
+
+</RelativeLayout>
