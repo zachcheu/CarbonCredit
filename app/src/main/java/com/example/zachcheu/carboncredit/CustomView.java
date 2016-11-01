@@ -185,6 +185,7 @@ public class CustomView extends View {
 
     public void setDistanceActive(String distanceActive) {
         this.distanceActive = distanceActive;
+
         invalidate();
     }
 
