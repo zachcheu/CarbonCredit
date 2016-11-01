@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/contrastBackground">
 
     <ImageView
         android:id="@+id/profilePic"
@@ -19,6 +20,7 @@
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@id/profilePic"
         android:layout_marginTop="30dp"
+        android:textColor="@color/log_color"
         android:id="@+id/infoLevel"
         android:textStyle="bold"/>
     <TextView
@@ -29,6 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/profilePic"
         android:layout_below="@id/infoLevel"
+        android:textColor="@color/log_color"
         android:layout_marginTop="13dp"
         android:id="@+id/level" />
     <TextView
@@ -38,6 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/profilePic"
+        android:textColor="@color/log_color"
         android:layout_below="@id/level"
         android:layout_marginTop="17dp"
         android:id="@+id/points" />
@@ -49,6 +53,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/profilePic"
+        android:textColor="@color/log_color"
         android:layout_marginLeft="40dp"
         android:id="@+id/varDrive" />
     <TextView
@@ -58,6 +63,7 @@
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/profilePic"
+        android:textColor="@color/log_color"
         android:paddingRight="3dp"
         android:id="@+id/varCC" />
     <TextView
@@ -67,6 +73,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:layout_below="@id/profilePic"
+        android:textColor="@color/log_color"
         android:layout_marginRight="40dp"
         android:id="@+id/varDist" />
 
@@ -78,6 +85,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/profilePic"
+        android:textColor="@color/log_color"
         android:layout_marginTop="40dp"
         android:layout_marginLeft="30dp"
         android:id="@+id/Drive" />
@@ -88,6 +96,7 @@
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/profilePic"
+        android:textColor="@color/log_color"
         android:layout_marginTop="40dp"
         android:paddingRight="3dp"
         android:id="@+id/AverageCC" />
@@ -98,6 +107,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:layout_below="@id/profilePic"
+        android:textColor="@color/log_color"
         android:layout_marginTop="40dp"
         android:layout_marginRight="30dp"
         android:id="@+id/distance" />
@@ -120,6 +130,7 @@
         android:layout_marginTop="18dp"
         android:layout_below="@+id/line1"
         android:layout_alignParentLeft="true"
+        android:textColor="@color/log_color"
         android:textStyle="bold"/>
     <TextView
         android:id="@+id/pointsNextLevel"
@@ -128,20 +139,22 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
+        android:textColor="@color/log_color"
         android:layout_below="@+id/line1"
         android:layout_toRightOf="@id/textNextLevel"/>
 
     <ProgressBar
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="10dp"
         android:id="@+id/progressBar"
         android:layout_below="@id/textNextLevel"
         android:visibility="visible"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:max="100"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:progressDrawable="@drawable/progress_bar"/>
     <View
         android:id="@+id/line2"
         android:layout_width="match_parent"

@@ -55,5 +55,6 @@
         android:src="@mipmap/restart"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
-        fab:fab_colorNormal="@color/refresh_button_color"/>
+        fab:fab_colorNormal="@color/refresh_button_color"
+        fab:fab_colorPressed="@color/pressed_button_color"/>
 </RelativeLayout>

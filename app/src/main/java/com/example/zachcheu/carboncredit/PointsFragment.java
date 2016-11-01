@@ -18,6 +18,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.zachcheu.carboncredit.R.id.progressBar;
+
 /**
  * Created by DevWork on 10/27/16.
  */
@@ -73,10 +75,9 @@ public class PointsFragment extends Fragment {
         varCredit = (TextView)getActivity().findViewById(R.id.varCC);
         varDist = (TextView)getActivity().findViewById(R.id.varDist);
         strMiles = (TextView)getActivity().findViewById(R.id.strMiles);
-        xpBar = (ProgressBar)getActivity().findViewById(R.id.progressBar);
+        xpBar = (ProgressBar)getActivity().findViewById(progressBar);
         list = (ListView)getActivity().findViewById(R.id.playerList);
-        list.getLayoutParams().height=size.y*48/100;
-
+        list.getLayoutParams().height=size.y*105/200;
 
         adapter = new CustomRankListAdapter(getActivity(),log);
         list.setAdapter(adapter);
@@ -87,7 +88,7 @@ public class PointsFragment extends Fragment {
             System.out.println("Test12:" + e);
         }
 
-        xpBar.setScaleY(2f);
+        xpBar.setScaleY(1f);
         profilePic.setBackgroundResource(R.mipmap.rocket);
         profilePic.setScaleX(0.8f);
         profilePic.setScaleY(0.8f);
@@ -121,7 +122,7 @@ public class PointsFragment extends Fragment {
             data.setUser(user.get(i));
             data.setTime(time.get(i));
             data.setDist(dist.get(i));
-            data.setPicId(i%3);
+            data.setPicId(i%4);
             this.log.add(data);
         }
         adapter.notifyDataSetChanged();
