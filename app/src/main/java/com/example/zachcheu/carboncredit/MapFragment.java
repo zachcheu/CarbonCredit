@@ -26,17 +26,17 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
 import org.w3c.dom.Text;
+import java.util.List;
 
 /**
  * Created by DevWork on 10/27/16.
  */
 
-public class MapFragment extends Fragment implements LocationListener {
+public class MapFragment extends Fragment implements LocationListener, PointMatcherCallback {
     public static final String ARG_OBJECT = "object";
 
     public MapView mapView;
     public LocationManager lm;
-    public DrivePointManager drivePointManager;
     public Context mContext;
 
     public TextView textView;
@@ -45,6 +45,8 @@ public class MapFragment extends Fragment implements LocationListener {
     public View custom;
     public CustomView customView;
 
+    public float endTime;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         MapboxAccountManager.getInstance();
@@ -52,7 +54,6 @@ public class MapFragment extends Fragment implements LocationListener {
         Bundle args = getArguments();
         int index = args.getInt(ARG_OBJECT);
 
-        drivePointManager = new DrivePointManager();
         //textView = (TextView) rootView.findViewById(R.id.speedText);
         //texter = (TextView) rootView.findViewById(R.id.texter);
         lm = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
@@ -60,10 +61,10 @@ public class MapFragment extends Fragment implements LocationListener {
         Typeface typeface = Typeface.createFromAsset(mContext.getAssets(), "fonts/Lato-Regular.ttf");
         Typeface typeface1 = Typeface.createFromAsset(mContext.getAssets(), "fonts/Lato-Bold.ttf");
         //texter.setTypeface(typeface1);
-       // texter.setLetterSpacing(0.5f);
+        // texter.setLetterSpacing(0.5f);
         //textView.setLetterSpacing(0.5f);
         //System.out.println(texter.getLetterSpacing());
-       // textView.setTypeface(typeface);
+        // textView.setTypeface(typeface);
 
         //custom = (View) rootView.findViewById(R.id.v);
         customView = (CustomView) rootView.findViewById(R.id.v);
@@ -92,53 +93,106 @@ public class MapFragment extends Fragment implements LocationListener {
         });
 
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 1, this);
-       // setTextLocation(custom);
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                float startTime = SystemClock.uptimeMillis();
+                while (true) {
+                    endTime = SystemClock.uptimeMillis() - startTime;
+                    if ((int)(endTime / 1000) >= 0) {
+
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (endTime / 1000 >= 0) {
+                                    customView.setCreditActive(String.valueOf((int) (endTime / 1000)));
+                                    //System.out.println(String.valueOf((int) (endTime / 1000)));
+                                }
+
+                            }
+                        });
+                    }
+
+                }
+
+            }
+        };
+        new Thread(r).start();
+        // setTextLocation(custom);
         return rootView;
     }
 
-    private void addLine() {
-
-        final DrivePoint lastPoint = drivePointManager.getLastPoint();
-        final DrivePoint secondtoLastPoint = drivePointManager.getSecondToLastPoint();
-
-        if (lastPoint == null)
-            return;
-
-        if (secondtoLastPoint == null)
-            return;
-
-        int speed1 = lastPoint.getSpeed();
-        int speed2 = secondtoLastPoint.getSpeed();
-
-        // calculate average speed between two points
-        int averageSpeed = (speed1 + speed2) / 2;
-
-        final int color;
-
-        /*
-         * Determine color condition
-         */
-        if (averageSpeed >= 0 && averageSpeed < 25) {
-            color = Color.parseColor("#2ecc71");
-        } else if (averageSpeed >= 25 && averageSpeed <= 40) {
-            color = Color.parseColor("#e67e22");
-        } else {
-            color = Color.parseColor("#c0392b");
-        }
-
-
+    @Override
+    public void addLines(final List<DrivePointPair> lines) {
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(MapboxMap mapboxMap) {
-                mapboxMap.addPolyline(new PolylineOptions()
-                        .add(new LatLng(secondtoLastPoint.getmLocation().getLatitude(), secondtoLastPoint.getmLocation().getLongitude()))
-                        .add(new LatLng(lastPoint.getmLocation().getLatitude(), lastPoint.getmLocation().getLongitude()))
-                        .add(new LatLng(secondtoLastPoint.getmLocation().getLatitude(), secondtoLastPoint.getmLocation().getLongitude()))
-                        .width(5)
-                        .color(color));
+                for (DrivePointPair pair : lines) {
+                    if (pair.from == null)
+                        continue;
+
+                    if (pair.to == null)
+                        continue;
+
+                    int speed1 = pair.from.getSpeed();
+                    int speed2 = pair.to.getSpeed();
+
+                    // calculate average speed between two points
+                    int averageSpeed = (speed1 + speed2) / 2;
+
+                    final int color;
+
+                    /*
+                     * Determine color condition
+                     */
+                    if (averageSpeed >= 0 && averageSpeed < 25) {
+                        color = Color.parseColor("#2ecc71");
+                    } else if (averageSpeed >= 25 && averageSpeed <= 40) {
+                        color = Color.parseColor("#e67e22");
+                    } else {
+                        color = Color.parseColor("#c0392b");
+                    }
+                    mapboxMap.addPolyline(new PolylineOptions()
+                            .add(new LatLng(pair.from.getmLocation().getLatitude(), pair.to.getmLocation().getLongitude()))
+                            .add(new LatLng(pair.to.getmLocation().getLatitude(), pair.from.getmLocation().getLongitude()))
+                            .add(new LatLng(pair.from.getmLocation().getLatitude(), pair.to.getmLocation().getLongitude()))
+                            .width(5)
+                            .color(color));
+                }
             }
         });
     }
+
+    /*private void addLine(DrivePoint from, DrivePoint to) {
+
+
+
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                float startTime = SystemClock.uptimeMillis();
+                while (true) {
+                    endTime = SystemClock.uptimeMillis() - startTime;
+                    if ((int)(endTime / 1000) >= 0) {
+
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (endTime / 1000 >= 0) {
+                                    customView.setCreditActive(String.valueOf((int) (endTime / 1000)));
+                                    //System.out.println(String.valueOf((int) (endTime / 1000)));
+                                }
+
+                            }
+                        });
+                    }
+
+                }
+
+            }
+        };
+        new Thread(r).start();
+    }*/
 
     @Override
     public void onLocationChanged(final Location location) {
@@ -146,11 +200,6 @@ public class MapFragment extends Fragment implements LocationListener {
         //@ param 1 : time -> we still need to calculate it properly...default is 0 for now
         //@ last param: isHighway...still need google maps api for this to work
         final Location temp = location;
-        drivePointManager.addPoint(new DrivePoint(
-                0,
-                (int) (location.getSpeed() * 2.2369),
-                location,
-                false));
 
         addLine();
 
@@ -158,10 +207,15 @@ public class MapFragment extends Fragment implements LocationListener {
             @Override
             public void run() {
 
+                if (location.hasSpeed()) {
+                    customView.setSpeedActive(String.valueOf((int) (temp.getSpeed() * 2.2369)));
+                } else {
+                    customView.setSpeedActive("0");
+                }
                 //if (location.hasSpeed())
-                    //texter.setText(String.valueOf((int) (temp.getSpeed() * 2.2369)) + " mph");
-               // else
-                    //texter.setText("0 mph");
+                //texter.setText(String.valueOf((int) (temp.getSpeed() * 2.2369)) + " mph");
+                // else
+                //texter.setText("0 mph");
             }
         });
     }
@@ -215,7 +269,7 @@ public class MapFragment extends Fragment implements LocationListener {
         this.mContext = m;
     }
 
-    public void setTextLocation(View v){
+    public void setTextLocation(View v) {
         int[] coordinate = new int[2];
         v.getLocationOnScreen(coordinate);
         System.out.println("LALAAAL: " + v.getTop() + ", " + v.getLeft());

@@ -41,7 +41,6 @@ public class Drive extends Activity implements LocationListener {
         MapboxAccountManager.start(this, getString(R.string.access_token));
 
         setContentView(R.layout.drive);
-        drivePointManager = new DrivePointManager();
         textView = (TextView) findViewById(R.id.speedView);
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/gothic.ttf");

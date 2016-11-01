@@ -5,7 +5,7 @@ import android.location.Location;
  * Created by DevWork on 10/14/16.
  */
 
-public class  DrivePoint {
+public class DrivePoint implements Cloneable {
 
     public boolean isHighway() {
         return isHighway;
@@ -60,5 +60,8 @@ public class  DrivePoint {
         this.isHighway = isHighway;
     }
 
-
+    @Override
+    public DrivePoint clone() {
+        return new DrivePoint(time, speed, new Location(mLocation), isHighway);
+    }
 }

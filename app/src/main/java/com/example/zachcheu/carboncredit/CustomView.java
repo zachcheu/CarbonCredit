@@ -46,10 +46,9 @@ public class CustomView extends View {
 
     public static final boolean DEBUG = false;
 
-    public String speedActive = "0 (mph)";
-    public String distanceActive = "0 (m)";
-    public String creditActive = "0 (c)";
-
+    public String speedActive = "0";
+    public String distanceActive = "0";
+    public String creditActive = "0";
 
 
     public CustomView(Context context, AttributeSet attributeSet) {
@@ -71,14 +70,13 @@ public class CustomView extends View {
         getRootView().setX(0);
         getRootView().setY(display.getHeight() - height - getResources().getDimensionPixelSize(R.dimen.height1));
 
-      //  getRootView().setX(0);
-         //x = display.getWidth();
+        //  getRootView().setX(0);
+        //x = display.getWidth();
         //y = display.getHeight();
     }
 
 
-
-    private void init(){
+    private void init() {
         p.setColor(Color.parseColor("#d3d3d3"));
         p.setTextSize(getResources().getDimensionPixelSize(R.dimen.textSize));
 
@@ -92,7 +90,7 @@ public class CustomView extends View {
         p1.setTypeface(typeface2);
 
         Rect f = new Rect();
-        String speed = "SPEED";
+        String speed = "SPEED (mph)";
 
         p.getTextBounds(speed, 0, speed.length(), f);
 
@@ -100,9 +98,8 @@ public class CustomView extends View {
         textWidth = f.width();
 
 
-
         f = new Rect();
-        speed = "DISTANCE";
+        speed = "DISTANCE (m)";
 
         p.getTextBounds(speed, 0, speed.length(), f);
 
@@ -111,7 +108,7 @@ public class CustomView extends View {
 
 
         f = new Rect();
-        speed = "CREDITS";
+        speed = "CREDITS (c)";
 
         p.getTextBounds(speed, 0, speed.length(), f);
 
@@ -121,9 +118,9 @@ public class CustomView extends View {
         debugPaint.setColor(Color.WHITE);
         debugPaint.setStrokeWidth(2.0f);
 
-        Point text_f = calcSize(p1, "0 (mph)");
-        Point text_f1 = calcSize(p1, "0 (m)");
-        Point text_f2 = calcSize(p1, "0 (c)");
+        Point text_f = calcSize(p1, "0");
+        Point text_f1 = calcSize(p1, "0");
+        Point text_f2 = calcSize(p1, "0");
 
         speedTextH = text_f.y;
         speedTextW = text_f.x;
@@ -136,13 +133,11 @@ public class CustomView extends View {
     /*
      * Based on font & string, calculate pixels wide and height of text
      */
-    public Point calcSize(Paint paint, String text){
+    public Point calcSize(Paint paint, String text) {
         Rect r = new Rect();
         paint.getTextBounds(text, 0, text.length(), r);
         return new Point(r.width(), r.height());
     }
-
-
 
 
     @Override
@@ -151,20 +146,20 @@ public class CustomView extends View {
     }
 
     @Override
-    public void draw(Canvas canvas){
-        super.draw(canvas);
+    public void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
         canvas.drawColor(Color.parseColor("#B3000000"));
 
-        canvas.drawText("SPEED", width/6 - textWidth/2 , height/2 + textHeight/2  - height/4, p);
-        canvas.drawText("DISTANCE", width/2 - textWidth1/2 , height/2 + textHeight1/2  - height/4, p);
-        canvas.drawText("CREDITS", width*5/6 - textWidth2/2, height/2 + textHeight2/2 - height/4, p);
+        canvas.drawText("SPEED (mph)", width / 6 - textWidth / 2, height / 2 + textHeight / 2 - height / 4, p);
+        canvas.drawText("DISTANCE (m)", width / 2 - textWidth1 / 2, height / 2 + textHeight1 / 2 - height / 4, p);
+        canvas.drawText("CREDITS (c)", width * 5 / 6 - textWidth2 / 2, height / 2 + textHeight2 / 2 - height / 4, p);
 
-        canvas.drawText(speedActive, width/6 - speedTextW/2, height/2 + speedTextH/2 , p1);
-        canvas.drawText(distanceActive, width/2 - distanceTextW/2, height/2 + distanceTextH/2 , p1);
-        canvas.drawText(creditActive, width*5/6 - creditsTextW/2, height/2 + creditsTextH/2, p1);
+        canvas.drawText(speedActive, width / 6 - speedTextW / 2, height / 2 + speedTextH / 2, p1);
+        canvas.drawText(distanceActive, width / 2 - distanceTextW / 2, height / 2 + distanceTextH / 2, p1);
+        canvas.drawText(creditActive, width * 5 / 6 - creditsTextW / 2, height / 2 + creditsTextH / 2, p1);
 
         // Draw grid margins @use for debug
-        if(DEBUG) {
+        if (DEBUG) {
             canvas.drawLine(width / 3, height, width / 3, 0, debugPaint);
             canvas.drawLine(width * 2 / 3, height, width * 2 / 3, 0, debugPaint);
             canvas.drawLine(width, height, width, 0, debugPaint);
@@ -173,7 +168,7 @@ public class CustomView extends View {
 
     }
 
-    public void forceRefresh(){
+    public void forceRefresh() {
         invalidate();
     }
 
@@ -183,5 +178,18 @@ public class CustomView extends View {
         setMeasuredDimension(width, height);
     }
 
+    public void setSpeedActive(String speedActive) {
+        this.speedActive = speedActive;
+        invalidate();
+    }
 
+    public void setDistanceActive(String distanceActive) {
+        this.distanceActive = distanceActive;
+        invalidate();
+    }
+
+    public void setCreditActive(String creditActive) {
+        this.creditActive = creditActive;
+        invalidate();
+    }
 }
