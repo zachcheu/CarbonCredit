@@ -5,7 +5,7 @@ import android.location.Location;
  * Created by DevWork on 10/14/16.
  */
 
-public class DrivePoint {
+public class  DrivePoint {
 
     public boolean isHighway() {
         return isHighway;

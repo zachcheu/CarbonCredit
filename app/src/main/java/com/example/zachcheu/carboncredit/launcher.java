@@ -1,6 +1,7 @@
 package com.example.zachcheu.carboncredit;
 
 import android.graphics.Color;
+import android.graphics.PointF;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -42,7 +43,7 @@ public class launcher extends AppCompatActivity{
     /*
      * library used to create navbar
      */
-    public AHBottomNavigation bottomNavigation;
+    public static AHBottomNavigation bottomNavigation;
 
     /*
      * list that holds all fragments
@@ -57,6 +58,12 @@ public class launcher extends AppCompatActivity{
     public PointsFragment pointsFragment;
     public SettingsFragment settingsFragment;
 
+    public static PointF pointF;
+
+    public Frug f = new Frug();
+
+    public static float dis;
+
 
     @Override
     public void onCreate(Bundle savedInstance){
@@ -70,6 +77,7 @@ public class launcher extends AppCompatActivity{
 
         // finish initialization of variables
         adapter = new CollectionPagerAdapter(getSupportFragmentManager());
+        pointF = new PointF();
         bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
         _itemlist = new ArrayList<AHBottomNavigationItem>();
         fragmentArrayList = new ArrayList<Fragment>();
@@ -106,6 +114,8 @@ public class launcher extends AppCompatActivity{
         // configures colors & behaviors of the navbar
         ConfigNavBarSettings();
 
+        pointF.set(bottomNavigation.getWidth(), bottomNavigation.getY());
+
         bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
             @Override
             public boolean onTabSelected(int position, boolean wasSelected) {
@@ -113,6 +123,7 @@ public class launcher extends AppCompatActivity{
                 return true;
             }
         });
+
 
     }
 
@@ -127,6 +138,7 @@ public class launcher extends AppCompatActivity{
         this.bottomNavigation.setCurrentItem(0);
     }
 
+
     protected void setStatusBarTranslucent(boolean makeTranslucent) {
         if (makeTranslucent) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -134,4 +146,6 @@ public class launcher extends AppCompatActivity{
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
     }
+
+
 }

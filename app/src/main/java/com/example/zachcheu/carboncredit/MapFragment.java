@@ -2,6 +2,7 @@ package com.example.zachcheu.carboncredit;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationListener;
@@ -41,6 +42,9 @@ public class MapFragment extends Fragment implements LocationListener {
     public TextView textView;
     public TextView texter;
 
+    public View custom;
+    public CustomView customView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         MapboxAccountManager.getInstance();
@@ -49,17 +53,20 @@ public class MapFragment extends Fragment implements LocationListener {
         int index = args.getInt(ARG_OBJECT);
 
         drivePointManager = new DrivePointManager();
-        textView = (TextView) rootView.findViewById(R.id.speedText);
-        texter = (TextView) rootView.findViewById(R.id.texter);
+        //textView = (TextView) rootView.findViewById(R.id.speedText);
+        //texter = (TextView) rootView.findViewById(R.id.texter);
         lm = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
 
         Typeface typeface = Typeface.createFromAsset(mContext.getAssets(), "fonts/Lato-Regular.ttf");
         Typeface typeface1 = Typeface.createFromAsset(mContext.getAssets(), "fonts/Lato-Bold.ttf");
-        texter.setTypeface(typeface1);
+        //texter.setTypeface(typeface1);
        // texter.setLetterSpacing(0.5f);
         //textView.setLetterSpacing(0.5f);
-        System.out.println(texter.getLetterSpacing());
-        textView.setTypeface(typeface);
+        //System.out.println(texter.getLetterSpacing());
+       // textView.setTypeface(typeface);
+
+        //custom = (View) rootView.findViewById(R.id.v);
+        customView = (CustomView) rootView.findViewById(R.id.v);
 
         mapView = (MapView) rootView.findViewById(R.id.mapview);
         mapView.onCreate(savedInstanceState);
@@ -85,6 +92,7 @@ public class MapFragment extends Fragment implements LocationListener {
         });
 
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 1, this);
+       // setTextLocation(custom);
         return rootView;
     }
 
@@ -150,10 +158,10 @@ public class MapFragment extends Fragment implements LocationListener {
             @Override
             public void run() {
 
-                if (location.hasSpeed())
-                    texter.setText(String.valueOf((int) (temp.getSpeed() * 2.2369)) + " mph");
-                else
-                    texter.setText("0 mph");
+                //if (location.hasSpeed())
+                    //texter.setText(String.valueOf((int) (temp.getSpeed() * 2.2369)) + " mph");
+               // else
+                    //texter.setText("0 mph");
             }
         });
     }
@@ -205,5 +213,11 @@ public class MapFragment extends Fragment implements LocationListener {
 
     public void setContext(Context m) {
         this.mContext = m;
+    }
+
+    public void setTextLocation(View v){
+        int[] coordinate = new int[2];
+        v.getLocationOnScreen(coordinate);
+        System.out.println("LALAAAL: " + v.getTop() + ", " + v.getLeft());
     }
 }

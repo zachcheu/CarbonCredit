@@ -7,4 +7,8 @@
     <dimen name="time">13dip</dimen>
     <dimen name="date">12dip</dimen>
     <dimen name="graphPad">1000dip</dimen>
+    <dimen name="textSize">9dp</dimen>
+    <dimen name="height">65dp</dimen>
+    <dimen name="height1">50dp</dimen>
+    <dimen name="textSize2">20dp</dimen>
 </resources>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/mapview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        mapbox:zoom="7"
+        mapbox:logo_enabled="false"
+        mapbox:compass_enabled="false">
+
+    </com.mapbox.mapboxsdk.maps.MapView>
+
+    <com.example.zachcheu.carboncredit.CustomView
+        android:id="@+id/v"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_alignParentBottom="true"
+        android:background="#B3000000"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        tools:text="SPEED"
+        android:id="@+id/speedText"
+        android:textColor="#d3d3d3"
+        android:layout_alignStart="@+id/texter"
+        android:text="SPEED"
+        android:textSize="9dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:background="#FFFFFF"
+        android:id="@+id/iv"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/texter"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="17dp"
+        tools:text="0 (mph)"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView" />
+
+
+</RelativeLayout>

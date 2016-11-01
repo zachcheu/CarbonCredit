@@ -16,36 +16,15 @@
 
     </com.mapbox.mapboxsdk.maps.MapView>
     
-    <View
+    <com.example.zachcheu.carboncredit.CustomView
         android:id="@+id/v"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_alignParentBottom="true"
-        android:background="#B3000000"/>
+        android:layout_height="match_parent"
+        />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="40dp"
-        tools:text="SPEED"
-        android:id="@+id/speedText"
-        android:textColor="#d3d3d3"
-        android:layout_alignStart="@+id/texter"
-        android:text="SPEED"
-        android:textSize="9dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:id="@+id/texter"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="17dp"
-        tools:text="0 (mph)"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp" />
+
+
 
 
 </RelativeLayout>
