@@ -12,9 +12,9 @@
     <color name="log_title_color">#000000</color>
     <color name="log_info_color">#000000</color>
     <color name="log_header_color">#000000</color>
-    <color name="refresh_button_color">#B4EDED</color>
+    <color name="refresh_button_color">#F16665</color>
     <color name="contrastBackground">#1c0931</color>
     <color name="primaryColor">#f82635</color>
     <color name="barBackground">#f0b0b2</color>
-    <color name="pressed_button_color">#94BBBF</color>
+    <color name="pressed_button_color">#C42754</color>
 </resources>

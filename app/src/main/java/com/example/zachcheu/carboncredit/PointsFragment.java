@@ -77,13 +77,14 @@ public class PointsFragment extends Fragment {
         strMiles = (TextView)getActivity().findViewById(R.id.strMiles);
         xpBar = (ProgressBar)getActivity().findViewById(progressBar);
         list = (ListView)getActivity().findViewById(R.id.playerList);
-        list.getLayoutParams().height=size.y*105/200;
+        list.getLayoutParams().height=size.y*213/400;
 
         adapter = new CustomRankListAdapter(getActivity(),log);
         list.setAdapter(adapter);
         try{
             varDrive.setText(""+getDriveCount());
             varCredit.setText(""+getCarbonAverage());
+            varDist.setText(""+74);
         }catch (Exception e) {
             System.out.println("Test12:" + e);
         }
@@ -122,7 +123,7 @@ public class PointsFragment extends Fragment {
             data.setUser(user.get(i));
             data.setTime(time.get(i));
             data.setDist(dist.get(i));
-            data.setPicId(i%4);
+            data.setPicId(i);
             this.log.add(data);
         }
         adapter.notifyDataSetChanged();

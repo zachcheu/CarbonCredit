@@ -113,7 +113,7 @@ public class LogsFragment extends Fragment {
         YAxis y = CarbonChart.getAxisLeft();
         x.setPosition(XAxis.XAxisPosition.BOTTOM);
         x.setDrawGridLines(false);
-        x.setAxisMinValue(2);
+        x.setAxisMinValue(1);
         x.setLabelCount(carbonData.size()-1);
         x.setAxisMaxValue(carbonData.size());//add values for unique increasing data
         x.setTextColor(Color.WHITE);
