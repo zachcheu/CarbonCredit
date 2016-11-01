@@ -60,6 +60,6 @@
         android:layout_toLeftOf="@id/strMiles"
         android:layout_centerVertical="true"
         android:textColor="@color/log_info_color"
-        android:textSize="@dimen/distance" />
+        android:textSize="20dp" />
 
 </RelativeLayout>
